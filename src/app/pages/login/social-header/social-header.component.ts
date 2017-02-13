@@ -1,3 +1,5 @@
+import { UserLoginModel } from './../../../models/userLoginModel';
+import { AuthService } from './../../../services/auth-service.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SocialHeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService : AuthService) { }
 
   ngOnInit() {
   }
+
+  googleLogin(){
+    this.authService.googleLogin();
+  }
+
+  fbLogin(){
+    this.authService.facebookLogin();
+  }
+
+  twitterLogin(){
+    this.authService.twitterLogin();
+  }
+
+  passwordLogin(user : UserLoginModel){
+    this.authService.passwordLogin(user);
+  }
+
+
+  
 
 }

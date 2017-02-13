@@ -1,3 +1,5 @@
+import { AuthService } from './services/auth-service.service';
+import { myFirebaseConfig, myFirebaseAuthConfig } from './fireBaseConfig';
 import { routing } from './app.routing';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -11,24 +13,7 @@ import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { HomeComponent } from './pages/home/home.component';
 
 
-const myFirebaseConfig = {
-  apiKey: 'AIzaSyCq7LVXElTjRI_89E7R097Zx3r-Tug2rjY',
-  authDomain: 'fashr-58a5e.firebaseapp.com',
-  databaseURL: 'https://fashr-58a5e.firebaseio.com',
-  storageBucket: 'fashr-58a5e.appspot.com',
-  messagingSenderId: '888483281021'
-};
 
-const myFirebaseAuthConfig = {
-  provider: AuthProviders.Google,
-  method: AuthMethods.Redirect,
-  remember: 'default'
-};
-
-// const firebaseAuthConfig = {
-//   method: AuthMethods.Popup,
-//   remember: 'default'
-// };
 
 @NgModule({
   declarations: [
@@ -44,7 +29,7 @@ const myFirebaseAuthConfig = {
     AngularFireModule.initializeApp(myFirebaseConfig, myFirebaseAuthConfig)
 
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

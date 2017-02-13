@@ -1,4 +1,6 @@
+import { AuthService } from './services/auth-service.service';
 import { Component } from '@angular/core';
+
 
 @Component({
   selector: 'fashR-root',
@@ -6,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'fashR works!';
+  
+  constructor(private authService : AuthService) {
+    
+  }
+  
 }
