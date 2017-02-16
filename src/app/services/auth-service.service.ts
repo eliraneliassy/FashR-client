@@ -14,8 +14,8 @@ export class AuthService {
             if (user) {
                 // user logged in
                 this.user = user;
-                 console.log("auth");
-                 console.log(user);
+                console.log("auth");
+                console.log(user);
             }
             else {
                 // user not logged in
@@ -28,7 +28,7 @@ export class AuthService {
 
     googleLogin() {
         this.af.auth.login({
-             method: AuthMethods.Popup,
+            method: AuthMethods.Popup,
             provider: AuthProviders.Google
         });
     }
@@ -42,22 +42,23 @@ export class AuthService {
 
     twitterLogin() {
         this.af.auth.login({
+            method: AuthMethods.Popup,
             provider: AuthProviders.Twitter
         });
     }
 
-    passwordLogin(user : UserLoginModel) {
-        this.af.auth.login({email: user.user, password: user.password},
-        {
-            method: AuthMethods.Password,
-            provider: AuthProviders.Password
-        });
+    passwordLogin(user: UserLoginModel) {
+        this.af.auth.login({ email: user.user, password: user.password },
+            {
+                method: AuthMethods.Password,
+                provider: AuthProviders.Password
+            });
     }
 
     logout() {
         this.af.auth.logout();
     }
 
-    
+
 
 }

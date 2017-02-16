@@ -19,8 +19,8 @@
         <li>
           <a>
             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-            <span *ngIf="isLogin" (click)="goToLogin();"> Login</span>
-            <span *ngIf="!isLogin" (click)="logout();"> Logout</span>
+            <span *ngIf="!isLogedIn" (click)="goToLogin();"> Login</span>
+            <span *ngIf="isLogedIn" (click)="logout();"> Logout</span>
           </a>
         </li>
       </ul>

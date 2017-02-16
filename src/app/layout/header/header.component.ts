@@ -9,17 +9,22 @@ import {Router} from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  isLogedIn: boolean = false;
+  
 
   constructor(private auth:AuthService, 
-  private router : Router) { }
-  isLogin: boolean = true;
+  private router : Router) {
+    if(this.auth.user){
+      this.isLogedIn = true;
+    }
+  }    
   ngOnInit() {
-    if(!this.auth.user)
-      this.isLogin = false;
+    
   }
 
   logout(){
     this.auth.logout();
+    this.isLogedIn = false;
   }
 
   goToLogin(){
