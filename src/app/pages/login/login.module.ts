@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { loginRouting } from './login.routing';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -8,7 +9,8 @@ import { SocialHeaderComponent } from './social-header/social-header.component';
 @NgModule({
   imports: [
     CommonModule,
-    loginRouting
+    loginRouting,
+    FormsModule
   ],
   declarations: [LoginComponent, RegisterComponent, SocialHeaderComponent]
 })

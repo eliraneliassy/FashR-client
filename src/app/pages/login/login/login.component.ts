@@ -1,3 +1,4 @@
+import { UserLoginModel } from './../../../models/userLoginModel';
 import { AuthService } from './../../../services/auth-service.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -13,8 +14,9 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  
+  onSubmit(userlogin: UserLoginModel){
+    this.auth.passwordLogin(userlogin);
+  }
 
-  
 
 }

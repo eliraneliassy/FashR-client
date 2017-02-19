@@ -4,7 +4,9 @@ export interface UserLoginModel{
 }
 
 export interface UserRegisterModel{
-    user:string,
+    firstName: string,
+    lastName: string,
+    email:string,
     password:string,
     confirmPassword: string
 }

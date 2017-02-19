@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { LoginComponent } from './../../pages/login/login/login.component';
 import { AuthService } from './../../services/auth-service.service';
 import { Component, OnInit } from '@angular/core';
@@ -9,14 +10,13 @@ import {Router} from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  isLogedIn: boolean = false;
   
+  isLogedIn : Observable<boolean>;
 
   constructor(private auth:AuthService, 
   private router : Router) {
-    if(this.auth.user){
-      this.isLogedIn = true;
-    }
+    this.isLogedIn = this.auth.isLoggedIn();
+    
   }    
   ngOnInit() {
     
@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit {
 
   logout(){
     this.auth.logout();
-    this.isLogedIn = false;
+    
   }
 
   goToLogin(){

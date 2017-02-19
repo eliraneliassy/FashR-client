@@ -16,12 +16,11 @@
 
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li>
-          <a>
-            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-            <span *ngIf="!isLogedIn" (click)="goToLogin();"> Login</span>
-            <span *ngIf="isLogedIn" (click)="logout();"> Logout</span>
-          </a>
+        <li *ngIf="!(isLogedIn | async)" (click)="goToLogin();">
+          <a>Login</a>
+        </li>
+        <li *ngIf="(isLogedIn | async)" (click)="logout();">
+          <a>Logout</a>
         </li>
       </ul>
     </div>

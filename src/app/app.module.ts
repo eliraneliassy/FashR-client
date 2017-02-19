@@ -1,5 +1,6 @@
+import { UserManagerService } from './services/user-manager-service.service';
+import { myFirebaseConfig,myFirebaseAuthConfig } from './config/fireBaseConfig';
 import { AuthService } from './services/auth-service.service';
-import { myFirebaseConfig, myFirebaseAuthConfig } from './fireBaseConfig';
 import { routing } from './app.routing';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -29,7 +30,7 @@ import { HomeComponent } from './pages/home/home.component';
     AngularFireModule.initializeApp(myFirebaseConfig, myFirebaseAuthConfig)
 
   ],
-  providers: [AuthService],
+  providers: [AuthService, UserManagerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
