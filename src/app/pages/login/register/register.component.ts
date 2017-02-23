@@ -10,12 +10,15 @@ import { Component, OnInit } from '@angular/core';
 export class RegisterComponent implements OnInit {
 
   constructor(private auth:AuthService) { }
-
+  passwordValid = true;
   ngOnInit() {
   }
 
   onSubmit(user: UserRegisterModel){
-    
+    if(user.password !== user.confirmPassword){
+      this.passwordValid = false;
+      return;
+    }
     this.auth.createUser(user);
   }
 
