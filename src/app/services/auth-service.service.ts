@@ -47,7 +47,6 @@ export class AuthService {
 
     private setAuth(){
         this.isAuthenticated.next(true);
-        this.router.navigate(["/"]);
         
     }
 
@@ -72,44 +71,49 @@ export class AuthService {
         }).then(res => this.setAuth());
     }
 
-    passwordLogin(user: UserLoginModel) {
-        this.af.auth.login({ email: user.user, password: user.password },
+    passwordLogin(user: UserLoginModel) : Promise<void> {
+        return new Promise<void>((resolve, reject) => {
+            return this.af.auth.login({ email: user.user, password: user.password },
             {
                 method: AuthMethods.Password,
                 provider: AuthProviders.Password
-            }).then(res => this.setAuth());
+            })
+            .then(res => {
+                this.setAuth();
+                return resolve();
+            })
+            .catch(() => reject());
+            });
     }
 
     createUser(user: UserRegisterModel) {
-        debugger
         this.af.auth.createUser({
             // Create user
             email: user.email,
             password: user.password
         })
-        .then(()=> console.log("sad"))
-        .catch((err)=> {
-            debugger; console.log(err)
-        })
-        .then(()=> {
+        .then((res)=> {
             this.passwordLogin(
             {
                 user: user.email,
                 password: user.password
-            });
-            this.userManager.registerToSlice({
+            }).then(()=>
+                this.userManager.registerToSlice({
                 userName : this.user.uid,
                 firstName : user.firstName,
                 lastName : user.lastName,
                 userEmail : user.email,
-                callBackUrl: AppConfig.homePage
-            
+                callBackUrl: AppConfig.apiURL + "/savenewuseritems/" + this.user.uid 
             })
-
+            );
+        })
+        .catch((err : any)=> {
+            debugger; console.log(err.message);
+            if(err.code == "auth/email-already-in-use")
+                return "err:email-already-in-use";
+            else
+                return "err";
         })
     }
-
-
-
 
 }

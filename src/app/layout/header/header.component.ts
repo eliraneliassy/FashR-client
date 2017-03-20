@@ -1,3 +1,4 @@
+import { Http, Headers } from '@angular/http';
 import { Observable } from 'rxjs';
 import { LoginComponent } from './../../pages/login/login/login.component';
 import { AuthService } from './../../services/auth-service.service';
@@ -14,7 +15,8 @@ export class HeaderComponent implements OnInit {
   isLogedIn : Observable<boolean>;
 
   constructor(private auth:AuthService, 
-              private router : Router) {
+              private router : Router,
+              private http: Http) {
     this.isLogedIn = this.auth.isLoggedIn();
     
   }    

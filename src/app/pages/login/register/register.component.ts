@@ -11,6 +11,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(private auth:AuthService) { }
   passwordValid = true;
+  userNameExist = false;
   ngOnInit() {
   }
 

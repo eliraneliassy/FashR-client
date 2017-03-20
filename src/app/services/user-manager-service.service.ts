@@ -25,11 +25,9 @@ export class UserManagerService {
 
 
     this.http.post(AppConfig.apiURL + "/users" ,body,options)
-    .toPromise()
-    .then ((res) => {
-      debugger
-      console.log(res.json()._body);
-      window.location.replace(res.json()._body)
+    .map((res)=> res.text())
+    .subscribe((redirectUrl) => {
+      window.location.replace(redirectUrl);
     });
     
   }
