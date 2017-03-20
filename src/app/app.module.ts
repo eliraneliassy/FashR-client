@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { HomeComponent } from './pages/home/home.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 
@@ -20,7 +21,8 @@ import { HomeComponent } from './pages/home/home.component';
   declarations: [
     AppComponent,
     HeaderComponent,
-    HomeComponent
+    HomeComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
