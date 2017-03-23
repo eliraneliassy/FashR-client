@@ -20,7 +20,7 @@
           <a>Login</a>
         </li>
         <li *ngIf="(isLogedIn | async)" (click)="logout();">
-          <a>Logout</a>
+          <a>{{firebase_user.uid }} | Logout</a>
         </li>
       </ul>
     </div>

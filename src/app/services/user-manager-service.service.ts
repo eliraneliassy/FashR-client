@@ -1,3 +1,5 @@
+import { AngularFire } from 'angularfire2';
+import { AuthService } from './auth-service.service';
 import { AppConfig } from './../config/appConfig';
 import { SliceRegistation } from './../models/sliceRegistration';
 import { Http, Headers, RequestOptions } from '@angular/http';
@@ -6,7 +8,10 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class UserManagerService {
 
-  constructor(private http: Http) { }
+  user : any = {};
+
+  constructor(private http: Http,
+  private firebaseService: AngularFire) { }
 
   static formatBody(data: Object) {
         let result = [];
@@ -16,6 +21,15 @@ export class UserManagerService {
         });
 
         return result.join('&');
+    }
+
+    getCurrentUser(string ){
+      let uid;
+      this.http.get(AppConfig.apiURL + "/users/" + uid)
+        .map((res) => res.json())
+        .subscribe((res) => {this.user = res});
+      
+      
     }
 
   registerToSlice(user: SliceRegistation){
@@ -29,6 +43,8 @@ export class UserManagerService {
     .subscribe((redirectUrl) => {
       window.location.replace(redirectUrl);
     });
+
+    
     
   }
 

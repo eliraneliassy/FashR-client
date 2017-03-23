@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { UserLoginModel } from './../../../models/userLoginModel';
 import { AuthService } from './../../../services/auth-service.service';
 import { Component, OnInit } from '@angular/core';
@@ -9,13 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private auth:AuthService) { }
+  private notCorrent : boolean = false;
+  constructor(private auth:AuthService,
+  private router: Router) { }
 
   ngOnInit() {
   }
 
   onSubmit(userlogin: UserLoginModel){
-    this.auth.passwordLogin(userlogin);
+    this.auth.passwordLogin(userlogin)
+    .then((res)=>{debugger; 
+        this.router.navigate(['/']);
+      },
+     (rej)=>{this.notCorrent = true;})
+    .catch((rej)=>{debugger})
+    
   }
 
 

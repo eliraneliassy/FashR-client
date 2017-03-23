@@ -10,32 +10,34 @@ import { BehaviorSubject, Observable } from 'rxjs';
 @Injectable()
 export class AuthService {
 
-    user : any = {};
     isAuthenticated = new BehaviorSubject(false);
-
     isLoggedIn(): Observable<boolean> {
         return this.isAuthenticated.asObservable();
     }
 
+    user :any = new BehaviorSubject({});
+    getUser() : Observable<any>{
+        return this.user.asObservable();
+    }
+    
 
     constructor(
         public af: AngularFire,
         private router : Router,
         private userManager : UserManagerService
+        
     ) {
         this.af.auth.subscribe(user => {
             if (user) {
+                
                 // user logged in
-                this.user = user;
+                this.user.next(user);
                 this.isAuthenticated.next(true);
-                console.log("auth");
-                console.log(user);
             }
             else {
                 // user not logged in
-                this.user = {};
+                this.user.next({});
                 this.isAuthenticated.next(false);
-                console.log("not auth");
 
             }
         });
