@@ -15,7 +15,7 @@ export class FeedService {
   }
 
   getUsersFeed(username: string){
-    return this.http.get(AppConfig.apiURL + "feed/" + username)
+    return this.http.get(AppConfig.apiURL + "/feed/" + username)
     .map((res) => res.json());
   }
 

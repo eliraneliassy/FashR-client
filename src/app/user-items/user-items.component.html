@@ -1,0 +1,16 @@
+
+<div class="container">
+
+
+  <h2>
+  All My Items:
+</h2>
+
+<div *ngFor="let item of items" class="col-sm-3 " >
+  
+    <fash-r-single-item [item]="item" *ngIf="item.parsingConfidence>90"></fash-r-single-item>
+  
+</div>
+
+</div>
+

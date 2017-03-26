@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
     this.isLogedIn = this.auth.isLoggedIn();
     this.auth.getUser().subscribe((res)=> {
       this.firebase_user = res;
-      debugger
+      //debugger
 
       this.user = userService.getCurrentUser(this.firebase_user.uid);
       console.log(this.user);

@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(userlogin: UserLoginModel){
+    debugger
     this.auth.passwordLogin(userlogin)
     .then((res)=>{debugger; 
         this.router.navigate(['/']);

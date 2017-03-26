@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.feedService.getFeed()
       .subscribe((res)=>{
+        debugger
         this.items = res;
         console.log(this.items)
       })

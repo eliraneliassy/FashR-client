@@ -9,11 +9,18 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">test-project</a>
+        <a class="navbar-brand" href="#">FashBash</a>
+
+      
     </div>
     <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-
+      <ul class="nav navbar-nav navbar-left">
+         <li>
+          <a routerLink='/'>Users Items</a>
+        </li>
+         <li>
+          <a routerLink='/myitems'>My Items</a>
+        </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li *ngIf="!(isLogedIn | async)" (click)="goToLogin();">

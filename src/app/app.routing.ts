@@ -1,9 +1,11 @@
+import { UserItemsComponent } from './user-items/user-items.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AppComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
 
 const APP_ROUTES: Routes = [
     { path: '', component: HomeComponent },
+    {path:'myitems', component:UserItemsComponent},
     { path: 'login', loadChildren: 'app/pages/login/login.module#LoginModule' }
 
 ];

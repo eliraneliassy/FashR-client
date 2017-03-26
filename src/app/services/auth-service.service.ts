@@ -89,24 +89,28 @@ export class AuthService {
     }
 
     createUser(user: UserRegisterModel) {
+        let uid;
         this.af.auth.createUser({
             // Create user
             email: user.email,
             password: user.password
         })
         .then((res)=> {
+            uid = res.uid;
             this.passwordLogin(
             {
                 user: user.email,
                 password: user.password
             }).then(()=>
-                this.userManager.registerToSlice({
-                userName : this.user.uid,
-                firstName : user.firstName,
-                lastName : user.lastName,
-                userEmail : user.email,
-                callBackUrl: AppConfig.apiURL + "/savenewuseritems/" + this.user.uid 
-            })
+                {
+                    this.userManager.registerToSlice({
+                        userName : uid,
+                        firstName : user.firstName,
+                        lastName : user.lastName,
+                        userEmail : user.email,
+                        callBackUrl: AppConfig.apiURL + "/savenewuseritems/" + uid 
+                    })
+            }
             );
         })
         .catch((err : any)=> {

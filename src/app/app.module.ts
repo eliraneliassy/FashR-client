@@ -14,6 +14,7 @@ import { HeaderComponent } from './layout/header/header.component';
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { HomeComponent } from './pages/home/home.component';
 import { SingleItemComponent } from './single-item/single-item.component';
+import { UserItemsComponent } from './user-items/user-items.component';
 
 
 
@@ -23,7 +24,8 @@ import { SingleItemComponent } from './single-item/single-item.component';
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    SingleItemComponent
+    SingleItemComponent,
+    UserItemsComponent
   ],
   imports: [
     BrowserModule,
