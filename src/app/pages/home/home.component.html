@@ -1,15 +1,14 @@
 
-<div class="container" (scroll)="onScroll($event)">
+<div class="container" appInfiniteScroll (loadMore)="loadMore($event)" [isInLoad]="isLoad" #cont>
 
 
   <h2>
   All users Items:
 </h2>
-
-<div *ngFor="let item of items" class="col-sm-3 " >
-  
-    <fash-r-single-item [item]="item"></fash-r-single-item>
-  
+<div class="result-items" >
+  <div *ngFor="let item of items" class="col-sm-3 " >
+      <fash-r-single-item [item]="item" ></fash-r-single-item>
+  </div>
 </div>
 
  

@@ -12,14 +12,33 @@ export class UserItemsComponent implements OnInit {
   constructor(private feedService : FeedService,
   private authService: AuthService) { }
 
-  items : any = [];
+ items: any =[];
+  page: number = 0;
+  isLoad: boolean = false;
+  user: any;
   
+  loadMore(event){
+    
+    if(event){
+      this.page++;
+      this.isLoad = true;
+      this.feedService.getUsersFeed(this.user.uid, this.page).subscribe((res)=>{
+        if(res == null){
+          this.isLoad = true;
+        }
+        this.items = this.items.concat(res);
+        console.log(this.items)
+        this.isLoad=false;
+      })
+    }
+  }
 
   ngOnInit() {
-    this.authService.af.auth.subscribe(user=>{
+    this.authService.user.subscribe(user=>{
       if(user){
         //debugger
-      this.feedService.getUsersFeed(user.uid)
+        this.user = user;
+      this.feedService.getUsersFeed(user.uid,0)
       .subscribe((res)=>{
        
         this.items = res;

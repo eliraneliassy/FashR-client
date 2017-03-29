@@ -1,5 +1,11 @@
 
-<div class="container">
+<div class="user-top">
+  <div class="user-img">
+      <img class="product-img img-circle" src="https://profile.microsoft.com/RegsysProfileCenter/Images/personal_info.jpg" > 
+  </div>
+</div>
+
+<div class="container" appInfiniteScroll (loadMore)="loadMore($event)" [isInLoad]="isLoad" #cont>
 
 
   <h2>

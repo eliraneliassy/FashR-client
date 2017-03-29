@@ -1,5 +1,5 @@
 import { FeedService } from './../../services/feed-service.service';
-import { Component, OnInit, HostListener, Inject } from '@angular/core';
+import { Component, OnInit, HostListener, Inject, ViewChild, ElementRef  } from '@angular/core';
 
 
 @Component({
@@ -9,36 +9,35 @@ import { Component, OnInit, HostListener, Inject } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private feedService : FeedService) { }
+  constructor(private feedService : FeedService ) { }
 
   items: any =[];
   page: number = 0;
-   max = (window.screen.height);
-
-  
-    
-@HostListener("window:scroll", ['$event'])
-onWindowScroll(event) {
- console.log(event);
- let pos = (document.documentElement.scrollTop || document.body.scrollTop);
-  
-   //console.log(pos);
-  
- if(pos == this.max)   {
-  console.log(10);
- }
-    
-    
-}
+  isLoad: boolean = false;
 
   ngOnInit() {
-     console.log(this.max);
-    this.feedService.getFeed()
+   
+    this.feedService.getFeed(this.page)
       .subscribe((res)=>{
-        //debugger
         this.items = res;
-        console.log(this.items)
       })
   }
+
+  loadMore(event){
+    
+    if(event){
+      this.page++;
+      this.isLoad = true;
+      this.feedService.getFeed(this.page).subscribe((res)=>{
+        if(res == null){
+          this.isLoad = true;
+        }
+        this.items = this.items.concat(res);
+        console.log(this.items)
+        this.isLoad=false;
+      })
+    }
+  }
+
 
 }

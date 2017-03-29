@@ -3,3 +3,7 @@
 .navbar-brand{
     color: $fashbash-color;
 }
+
+.navbar-form .input-group>.form-control{
+    width:calc(350px);
+}

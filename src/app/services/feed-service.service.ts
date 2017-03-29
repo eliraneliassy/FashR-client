@@ -9,13 +9,13 @@ export class FeedService {
     
   }
 
-  getFeed(){
-    return this.http.get(AppConfig.apiURL + "/feed/")
+  getFeed(page: number){
+    return this.http.get(AppConfig.apiURL + "/feed?page=" + page)
     .map((res) => res.json());
   }
 
-  getUsersFeed(username: string){
-    return this.http.get(AppConfig.apiURL + "/feed/" + username)
+  getUsersFeed(username: string, page:number){
+    return this.http.get(AppConfig.apiURL + "/feed/user?userId=" + username + "&page=" + page)
     .map((res) => res.json());
   }
 

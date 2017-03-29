@@ -15,6 +15,7 @@ import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { HomeComponent } from './pages/home/home.component';
 import { SingleItemComponent } from './single-item/single-item.component';
 import { UserItemsComponent } from './user-items/user-items.component';
+import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 
 
 
@@ -25,7 +26,8 @@ import { UserItemsComponent } from './user-items/user-items.component';
     HeaderComponent,
     HomeComponent,
     SingleItemComponent,
-    UserItemsComponent
+    UserItemsComponent,
+    InfiniteScrollDirective
   ],
   imports: [
     BrowserModule,

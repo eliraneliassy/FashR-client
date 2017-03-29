@@ -22,6 +22,8 @@
           <a routerLink='/myitems'>My Items</a>
         </li>
       </ul>
+      
+    
       <ul class="nav navbar-nav navbar-right">
         <li *ngIf="!(isLogedIn | async)" (click)="goToLogin();">
           <a>Login</a>
@@ -30,6 +32,15 @@
           <a>{{firebase_user.uid }} | Logout</a>
         </li>
       </ul>
+
+          <form class="navbar-form">
+        <div class="form-group" style="display:inline;">
+          <div class="input-group">
+            <input type="text" class="form-control">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+          </div>
+        </div>
+      </form>
     </div>
     <!--/.nav-collapse -->
   </div>
