@@ -33,10 +33,10 @@
         </li>
       </ul>
 
-          <form class="navbar-form">
+          <form class="navbar-form" >
         <div class="form-group" style="display:inline;">
           <div class="input-group">
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" name="serachbar" [(ngModel)]="query" (keyup)=search(searchBox.value) #searchBox>
             <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
           </div>
         </div>

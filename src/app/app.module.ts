@@ -1,3 +1,4 @@
+import { SuggestionsService } from './services/suggestions-service.service';
 import { FeedService } from './services/feed-service.service';
 import { UserManagerService } from './services/user-manager-service.service';
 import { myFirebaseConfig,myFirebaseAuthConfig } from './config/fireBaseConfig';
@@ -37,7 +38,7 @@ import { InfiniteScrollDirective } from './directives/infinite-scroll.directive'
     AngularFireModule.initializeApp(myFirebaseConfig, myFirebaseAuthConfig)
 
   ],
-  providers: [AuthService, UserManagerService, FeedService],
+  providers: [AuthService, UserManagerService, FeedService, SuggestionsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

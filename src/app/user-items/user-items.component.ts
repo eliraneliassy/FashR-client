@@ -14,7 +14,7 @@ export class UserItemsComponent implements OnInit {
   private authService: AuthService,
   private userM: UserManagerService) { }
 
- items: any =[];
+  items: any =[];
   page: number = 0;
   isLoad: boolean = false;
   user: any;
