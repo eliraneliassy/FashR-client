@@ -11,7 +11,9 @@ export class UserManagerService {
   user : any = {};
 
   constructor(private http: Http,
-  private firebaseService: AngularFire) { }
+  private firebaseService: AngularFire) { 
+    
+  }
 
   static formatBody(data: Object) {
         let result = [];
@@ -23,13 +25,10 @@ export class UserManagerService {
         return result.join('&');
     }
 
-    getCurrentUser(string ){
-      let uid;
-      this.http.get(AppConfig.apiURL + "/users/" + uid)
+    getCurrentUser(uid : string){
+      return this.http.get(AppConfig.apiURL + "/users/user?userName=" + uid)
         .map((res) => res.json())
-        .subscribe((res) => {this.user = res});
-      
-      
+        
     }
 
   registerToSlice(user: SliceRegistation){

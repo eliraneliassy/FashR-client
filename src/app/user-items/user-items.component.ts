@@ -1,3 +1,4 @@
+import { UserManagerService } from './../services/user-manager-service.service';
 import { AuthService } from './../services/auth-service.service';
 import { FeedService } from './../services/feed-service.service';
 import { Component, OnInit } from '@angular/core';
@@ -10,12 +11,15 @@ import { Component, OnInit } from '@angular/core';
 export class UserItemsComponent implements OnInit {
 
   constructor(private feedService : FeedService,
-  private authService: AuthService) { }
+  private authService: AuthService,
+  private userM: UserManagerService) { }
 
  items: any =[];
   page: number = 0;
   isLoad: boolean = false;
   user: any;
+
+  firebaseUser: any ={};
   
   loadMore(event){
     
@@ -36,15 +40,18 @@ export class UserItemsComponent implements OnInit {
   ngOnInit() {
     this.authService.user.subscribe(user=>{
       if(user){
-        //debugger
+        this.userM.getCurrentUser(user.uid).subscribe((res)=>{
+          if(res != null){
+            this.firebaseUser = res;
+          }
+        })
+        
         this.user = user;
       this.feedService.getUsersFeed(user.uid,0)
       .subscribe((res)=>{
-       
         this.items = res;
-        console.log(this.items)
-       
       })
+      
       }
     });
      
