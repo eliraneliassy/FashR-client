@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  private notCorrent : boolean = false;
+  public notCorrent : boolean = false;
   constructor(private auth:AuthService,
   private router: Router) { }
 

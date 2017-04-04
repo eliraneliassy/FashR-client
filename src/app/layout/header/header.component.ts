@@ -6,7 +6,7 @@ import { Observable, Subject } from 'rxjs';
 import { LoginComponent } from './../../pages/login/login/login.component';
 import { AuthService } from './../../services/auth-service.service';
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'fash-r-header',
@@ -14,79 +14,72 @@ import {Router} from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  
-  isLogedIn : Observable<boolean>;
-  firebase_user : any;
-  user:any;
 
-  private searchTerms = new Subject<string>();  
-  usersSuggestions :any[] = [];
-  
+  isLogedIn: Observable<boolean>;
+  firebase_user: any = {};
+  user: any;
 
-  constructor(private auth:AuthService, 
-              private router : Router,
-              private http: Http,
-              private userService: UserManagerService,
-              private suggestionsService : SuggestionsService) {
+  private searchTerms = new Subject<string>();
+  usersSuggestions: any[] = [];
+
+
+  constructor(private auth: AuthService,
+    private router: Router,
+    private http: Http,
+    private userService: UserManagerService,
+    private suggestionsService: SuggestionsService) {
 
     this.isLogedIn = this.auth.isLoggedIn();
-    this.auth.getUser().subscribe((res)=> {
-      this.firebase_user = res;
+  
 
-
-      this.user = userService.getCurrentUser(this.firebase_user.uid);
-    });
-    
-  } 
-
-  ngOnInit() {
-    this.searchTerms.debounceTime(500).
-    distinctUntilChanged()
-    .subscribe(searchTextValue => {
-      debugger
-      this.suggestionsService.getSuggestions(searchTextValue)
-      .subscribe((res) => {
-        debugger
-        if(res){
-            res.forEach(element => {
-              debugger
-              this.usersSuggestions.push(
-                {'name':element.firstName + " " + element.lastName, 'imageUrl': element.imageUrl}
-              )
-            });
-          }
-      })
-  });
-}
-    // this.usersSuggestions = this.searchTerms
-    //  .debounceTime(300)
-    //  .distinctUntilChanged()
-    //  .switchMap(term => 
-    //  term ? this.suggestionsService.getSuggestions(term)
-    //  : Observable.of<any[]>([]))
-    //  .catch(error => {
-    //     // TODO: add real error handling
-    //     console.log(error);
-    //     return Observable.of<any[]>([]);
-    //   });
-      
-  // }
-
-  logout(){
-    this.auth.logout();
-    
   }
 
-  goToLogin(){
+  ngOnInit() {
+
+    this.auth.user.subscribe(user => {
+      if (Object.keys(user).length !== 0) {
+        this.userService.getCurrentUser(user.uid).subscribe((res) => {
+          if (res != null) {
+            this.firebase_user = res;
+          }
+        });
+      }
+    });
+
+    this.searchTerms.debounceTime(300)
+      .distinctUntilChanged()
+      .subscribe(searchTextValue => {
+        this.suggestionsService.getSuggestions(searchTextValue)
+          .subscribe((res) => {
+            this.usersSuggestions = [];
+            if (res) {
+              res.forEach(element => {
+                this.usersSuggestions.push(
+                  { 'name': element.firstName + " " + element.lastName, 'imageUrl': element.imageUrl }
+                )
+              });
+            }
+          })
+      });
+  }
+
+
+  logout() {
+    this.auth.logout();
+
+  }
+
+  goToLogin() {
     this.router.navigate(['/login']);
   }
 
-  search(term: string) : void  {
+  search(term: string): void {
     this.searchTerms.next(term);
-  } 
+  }
 
-select(item){
-   
-}
+  select(user) {
+    this.router.navigate(['/users']);
+
+  }
 
 }

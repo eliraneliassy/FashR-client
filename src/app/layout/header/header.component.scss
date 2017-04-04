@@ -7,3 +7,43 @@
 .navbar-form .input-group>.form-control{
     width:calc(350px);
 }
+
+#navbar{
+    .active{
+        background-color: cornflowerblue;
+    }
+}
+
+#search-box{
+    position: relative;
+
+    #auto-result{
+    position: absolute;
+    top:40px;
+    width:90%;
+    background: #fefefe !important;
+    left:0;
+    
+    .search-result{
+        border-bottom: 1px solid gray;
+        border-left: 1px solid gray;
+        border-right: 1px solid gray;
+        width:100%;
+
+        padding: 5px;
+        background-color: white;
+        cursor: pointer;
+    }
+    .search-result:hover {
+        color: #eee;
+        background-color: #607D8B;
+    }
+
+    img{
+        height: 40px;
+        width: 40px;
+    }
+}
+
+}
+

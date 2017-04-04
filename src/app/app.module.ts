@@ -1,3 +1,4 @@
+import { AuthGuardService } from './services/auth-guard.service';
 import { SuggestionsService } from './services/suggestions-service.service';
 import { FeedService } from './services/feed-service.service';
 import { UserManagerService } from './services/user-manager-service.service';
@@ -17,6 +18,10 @@ import { HomeComponent } from './pages/home/home.component';
 import { SingleItemComponent } from './single-item/single-item.component';
 import { UserItemsComponent } from './user-items/user-items.component';
 import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { MaterialModule } from '@angular/material';
+import 'hammerjs';
+
 
 
 
@@ -28,17 +33,19 @@ import { InfiniteScrollDirective } from './directives/infinite-scroll.directive'
     HomeComponent,
     SingleItemComponent,
     UserItemsComponent,
-    InfiniteScrollDirective
+    InfiniteScrollDirective,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     routing,
+    MaterialModule,
     AngularFireModule.initializeApp(myFirebaseConfig, myFirebaseAuthConfig)
 
   ],
-  providers: [AuthService, UserManagerService, FeedService, SuggestionsService],
+  providers: [AuthService, UserManagerService, FeedService, SuggestionsService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

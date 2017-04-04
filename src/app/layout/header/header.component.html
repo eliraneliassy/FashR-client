@@ -16,10 +16,10 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-left">
          <li>
-          <a routerLink='/'>Users Items</a>
+          <a routerLink='/' routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Users Items</a>
         </li>
          <li>
-          <a routerLink='/myitems'>My Items</a>
+          <a routerLink='/myitems'  routerLinkActive="active">My Items</a>
         </li>
       </ul>
       
@@ -29,16 +29,26 @@
           <a>Login</a>
         </li>
         <li *ngIf="(isLogedIn | async)" (click)="logout();">
-          <a>{{firebase_user.uid }} | Logout</a>
+          <a>Hello {{firebase_user.firstName }} |  Logout</a>
         </li>
       </ul>
 
           <form class="navbar-form" >
         <div class="form-group" style="display:inline;">
-          <div class="input-group">
-            <input type="text" class="form-control" name="serachbar" [(ngModel)]="query" (keyup)=search(searchBox.value) #searchBox>
+          <div class="input-group" id="search-box">
+            <input type="text" class="form-control" name="serachbar" (keyup)=search(searchBox.value) #searchBox >
             <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+             
+             <div id="auto-result">
+                 <div *ngFor="let user of usersSuggestions"
+                (click)="select(user)" class="search-result" >
+                  <img [src]="user.imageUrl">
+                  {{user.name}}
+               </div>
+             </div>
           </div>
+         
+         
         </div>
       </form>
     </div>
