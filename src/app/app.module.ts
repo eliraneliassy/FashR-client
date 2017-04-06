@@ -1,3 +1,5 @@
+import { SharedModule } from './shared/shared/shared.module';
+import { UsersModule } from './pages/users/users.module';
 import { AuthGuardService } from './services/auth-guard.service';
 import { SuggestionsService } from './services/suggestions-service.service';
 import { FeedService } from './services/feed-service.service';
@@ -15,15 +17,8 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { HomeComponent } from './pages/home/home.component';
-import { SingleItemComponent } from './single-item/single-item.component';
-import { UserItemsComponent } from './user-items/user-items.component';
-import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { MaterialModule } from '@angular/material';
-import 'hammerjs';
-
-
-
+import { TabsComponent } from './components/tabs/tabs.component';
 
 
 @NgModule({
@@ -31,17 +26,15 @@ import 'hammerjs';
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    SingleItemComponent,
-    UserItemsComponent,
-    InfiniteScrollDirective,
-    NotFoundComponent
+    NotFoundComponent,
+    TabsComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     routing,
-    MaterialModule,
+    SharedModule,
     AngularFireModule.initializeApp(myFirebaseConfig, myFirebaseAuthConfig)
 
   ],

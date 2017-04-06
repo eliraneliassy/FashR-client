@@ -1,6 +1,7 @@
-import { UserManagerService } from './../services/user-manager-service.service';
-import { AuthService } from './../services/auth-service.service';
-import { FeedService } from './../services/feed-service.service';
+import { FeedService } from './../../../services/feed-service.service';
+import { UserManagerService } from './../../../services/user-manager-service.service';
+import { AuthService } from './../../../services/auth-service.service';
+
 import { Component, OnInit } from '@angular/core';
 
 @Component({

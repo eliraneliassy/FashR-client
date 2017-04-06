@@ -31,6 +31,11 @@ export class UserManagerService {
         
     }
 
+    getAllusers(){
+      return this.http.get(AppConfig.apiURL + "/users/")
+      .map((res)=> res.json())
+    }
+
   registerToSlice(user: SliceRegistation){
     const body = UserManagerService.formatBody(user);
     let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
