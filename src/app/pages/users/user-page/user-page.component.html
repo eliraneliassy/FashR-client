@@ -1,4 +1,45 @@
+  <div class="user-top text-center ">
+    <div class="row container">
+      <div class="user-img col-md-3">
+        <img class="product-img img-circle" src="http://www.expogeorgia.ge/wp-content/uploads/2015/09/anonymous-user.png">
+
+      </div>
+      <div class="col-md-9">
+        <div class="col-md-6">
+          <div class="user-fullname">
+            {{user.userDeatiles?.firstName}}
+             {{user.userDeatiles?.lastName}}
+          </div>
+          <div class="user-followrs">
+            <span>followrs</span>
+            <span class="fash">
+                {{user.countFollowers}}
+      </span>
+          </div>
+        </div>
+        <div class="user-following">
+          <span>following</span>
+          <span class="fash">
+        {{user.countFollowing}}
+      </span>
+        </div>
+        <div class="user-items-count">
+          <span>spent</span>
+          <span class="fash">
+        {{(+user.moneySpent/100) | currency:'USD':true}}
+      </span>
+        </div>
+        <button class="btn btn-primary" (click)="Follow()">
+      Follow
+    </button>
+
+      </div>
+    </div>
+  </div>
+
+
 <div class="container">
+
     <div class="row">
         <div class="col-xs-4 tab">My Purchases</div>
 
