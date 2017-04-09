@@ -18,31 +18,34 @@ export class UserPageComponent implements OnInit, OnDestroy {
   paramsSubscription: Subscription;
   user: any = {};
 
-  follow : boolean = false;
+  follow: boolean = false;
 
 
   constructor(private route: ActivatedRoute,
-   private authService: AuthService, 
-   private userM: UserManagerService,
-   private socialM : SocialManagerService
+    private authService: AuthService,
+    private userM: UserManagerService,
+    private socialM: SocialManagerService
+
   ) { }
 
-
-
-  ngOnInit() {
-    this.userId = this.route.snapshot.params['id'];
-
-    this.userM.getUserProfileDetails(this.userId)
+  private loadUserDetails(){
+      this.userM.getUserProfileDetails(this.userId)
       .subscribe((res) => {
         if (res != null) {
           this.user = res;
         }
       })
+  }
+
+  ngOnInit() {
+    this.userId = this.route.snapshot.params['id'];
+    this.loadUserDetails();
 
     this.paramsSubscription =
       this.route.params
         .subscribe((params: Params) => {
           this.userId = params['id'];
+          this.loadUserDetails();
         });
 
 
@@ -62,13 +65,15 @@ export class UserPageComponent implements OnInit, OnDestroy {
 
   }
 
-  Follow(){
-    this.socialM.follow(this.authService.user, this.userId)
-    .subscribe(()=>{
-      this.follow = true;
-    });
-    
-    
+  Follow() {
+    let user = this.authService.getUser()
+      .subscribe((res) => {
+        this.socialM.follow(res.uid, this.userId)
+          .subscribe(() => {
+            this.follow = true;
+            this.user.countFollowers++;
+          })
+      })
   }
 
   ngOnDestroy(): void {

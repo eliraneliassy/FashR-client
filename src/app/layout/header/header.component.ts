@@ -38,7 +38,7 @@ export class HeaderComponent implements OnInit {
 
     this.auth.user.subscribe(user => {
       if (Object.keys(user).length !== 0) {
-        this.userService.getCurrentUser(user.uid).subscribe((res) => {
+        this.userService.getUser(user.uid).subscribe((res) => {
           if (res != null) {
             this.firebase_user = res;
           }
@@ -49,13 +49,17 @@ export class HeaderComponent implements OnInit {
     this.searchTerms.debounceTime(300)
       .distinctUntilChanged()
       .subscribe(searchTextValue => {
+        if(searchTextValue == "") {
+          this.usersSuggestions = [];
+          return;
+        }
         this.suggestionsService.getSuggestions(searchTextValue)
           .subscribe((res) => {
             this.usersSuggestions = [];
             if (res) {
               res.forEach(element => {
                 this.usersSuggestions.push(
-                  { 'name': element.firstName + " " + element.lastName, 'imageUrl': element.imageUrl }
+                  { 'name': element.firstName + " " + element.lastName, 'imageUrl': element.imageUrl, 'uid':element.userName }
                 )
               });
             }
@@ -78,7 +82,8 @@ export class HeaderComponent implements OnInit {
   }
 
   select(user) {
-    this.router.navigate(['/users']);
+    this.router.navigate(['/users/'+user.uid]);
+    this.usersSuggestions = [];
 
   }
 

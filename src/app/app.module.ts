@@ -1,10 +1,11 @@
+import { SocialManagerService } from './services/social-manager.service';
 import { SharedModule } from './shared/shared/shared.module';
 import { UsersModule } from './pages/users/users.module';
 import { AuthGuardService } from './services/auth-guard.service';
 import { SuggestionsService } from './services/suggestions-service.service';
 import { FeedService } from './services/feed-service.service';
 import { UserManagerService } from './services/user-manager-service.service';
-import { myFirebaseConfig,myFirebaseAuthConfig } from './config/fireBaseConfig';
+import { myFirebaseConfig, myFirebaseAuthConfig } from './config/fireBaseConfig';
 import { AuthService } from './services/auth-service.service';
 import { routing } from './app.routing';
 import { BrowserModule } from '@angular/platform-browser';
@@ -38,7 +39,7 @@ import { TabsComponent } from './components/tabs/tabs.component';
     AngularFireModule.initializeApp(myFirebaseConfig, myFirebaseAuthConfig)
 
   ],
-  providers: [AuthService, UserManagerService, FeedService, SuggestionsService, AuthGuardService],
+  providers: [AuthService, UserManagerService, FeedService, SocialManagerService, SuggestionsService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

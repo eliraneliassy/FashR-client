@@ -25,7 +25,7 @@ export class UserManagerService {
         return result.join('&');
     }
 
-    getCurrentUser(uid : string){
+    getUser(uid : string){
       return this.http.get(AppConfig.apiURL + "/users/user?userName=" + uid)
         .map((res) => res.json())
         
@@ -36,9 +36,19 @@ export class UserManagerService {
       .map((res)=> res.json())
     }
 
+    getAllUsersProfile(userName: string){
+      return this.http.get(AppConfig.apiURL + "/app/usersprofile/" + userName)
+      .map((res)=> res.json())
+    }
+   
+
     getUserProfileDetails(userName : string){
       return this.http.get(AppConfig.apiURL+ "/users/userprofile?userName=" + userName).
       map((res)=>res.json())
+    }
+
+    checkIfFolow(userName : string, followedUserName : string){
+      
     }
 
   registerToSlice(user: SliceRegistation){
