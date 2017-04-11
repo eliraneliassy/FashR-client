@@ -25,13 +25,11 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.authService.getUser().subscribe((res) => {
       if (res.uid != undefined) {
         this.sub = this.userM.getAllUsersProfile(res.uid)
-        .subscribe((res) => {
-          this.users = res;
-          console.log(this.users)
-        })
+          .subscribe((res) => {
+            this.users = res;
+            console.log(this.users)
+          })
       }
-   
-
 
     })
 

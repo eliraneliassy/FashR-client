@@ -4,7 +4,11 @@
             <div class="user-img">
                 <img class="product-img img-circle" [src]="user.userDeatiles.imageUrl">
             </div>
-            <div class="user-name">{{user.userDeatiles.firstName}} {{user.userDeatiles.lastName}} </div>
+            <div class="user-name">
+                <a [routerLink]="['/users/',user.userDeatiles.userName]">
+                {{user.userDeatiles.firstName}} {{user.userDeatiles.lastName}}
+                </a>
+            </div>
             <button class="btn btn-primary" *ngIf="!user.isFollowed">Follow</button>
             <button class="btn btn-warning" *ngIf="user.isFollowed">UnFollow</button>
             <div class="social">
@@ -13,15 +17,15 @@
                         Followers {{user.countFollowers}}
                     </div>
                     <div class="col-xs-6">
-                      Following {{user.countFollowing}}
+                        Following {{user.countFollowing}}
                     </div>
                 </div>
-                 <div class="row">
+                <div class="row">
                     <div class="col-xs-6">
                         Items {{user.countItems}}
                     </div>
                     <div class="col-xs-6">
-                      Spent {{user.moneySpent / 100  | currency:'USD':true}}
+                        Spent {{user.moneySpent / 100 | currency:'USD':true}}
                     </div>
                 </div>
             </div>

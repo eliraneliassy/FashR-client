@@ -42,8 +42,8 @@ export class UserManagerService {
     }
    
 
-    getUserProfileDetails(userName : string){
-      return this.http.get(AppConfig.apiURL+ "/users/userprofile?userName=" + userName).
+    getUserProfileDetails(userName : string, currentUserName: string){
+      return this.http.get(AppConfig.apiURL+ "/users/userprofile/"+ userName +"?followedUserName=" + currentUserName).
       map((res)=>res.json())
     }
 

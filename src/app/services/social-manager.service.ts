@@ -14,4 +14,9 @@ export class SocialManagerService {
     .map((res)=> res)
   }
 
+  unFollow(userName:string, followedUserName:string){
+      return this.http.get(AppConfig.apiURL+ "/social/unfollow?userName=" + userName + "&followedUserName="+ followedUserName)
+    .map((res)=> res)
+  }
+
 }

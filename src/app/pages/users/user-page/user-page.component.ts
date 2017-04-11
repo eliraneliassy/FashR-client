@@ -16,9 +16,13 @@ export class UserPageComponent implements OnInit, OnDestroy {
 
   userId: string;
   paramsSubscription: Subscription;
-  user: any = {};
+  user: any = {
+    'userDeatiles': {
+      'imageUrl': 'http://www.expogeorgia.ge/wp-content/uploads/2015/09/anonymous-user.png'
+    }
+  };
 
-  follow: boolean = false;
+  self: boolean = false;
 
 
   constructor(private route: ActivatedRoute,
@@ -26,15 +30,29 @@ export class UserPageComponent implements OnInit, OnDestroy {
     private userM: UserManagerService,
     private socialM: SocialManagerService
 
-  ) { }
+  ) {
 
-  private loadUserDetails(){
-      this.userM.getUserProfileDetails(this.userId)
-      .subscribe((res) => {
-        if (res != null) {
-          this.user = res;
+  }
+
+  private loadUserDetails() {
+    let currentUser;
+    this.authService.getUser().subscribe((res) => {
+      if (res.uid != undefined) {
+        currentUser = res.uid;
+        if(res.uid == this.userId){
+          this.self = true;
         }
-      })
+        this.userM.getUserProfileDetails(this.userId, currentUser)
+          .subscribe((res) => {
+            if (res != null) {
+              this.user = res;
+            }
+          })
+
+      }
+
+    })
+
   }
 
   ngOnInit() {
@@ -65,13 +83,24 @@ export class UserPageComponent implements OnInit, OnDestroy {
 
   }
 
-  Follow() {
+  follow() {
     let user = this.authService.getUser()
       .subscribe((res) => {
         this.socialM.follow(res.uid, this.userId)
           .subscribe(() => {
-            this.follow = true;
+            this.user.isFollowed = true;
             this.user.countFollowers++;
+          })
+      })
+  }
+
+  unFollow(){
+     let user = this.authService.getUser()
+      .subscribe((res) => {
+        this.socialM.unFollow(res.uid, this.userId)
+          .subscribe(() => {
+            this.user.isFollowed = false;
+            this.user.countFollowers--;
           })
       })
   }
