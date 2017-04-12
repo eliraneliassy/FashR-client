@@ -15,21 +15,21 @@ export class AuthService {
         return this.isAuthenticated.asObservable();
     }
 
-    user :any = new BehaviorSubject({});
-    getUser() : Observable<any>{
+    user: any = new BehaviorSubject({});
+    getUser(): Observable<any> {
         return this.user.asObservable();
     }
-    
+
 
     constructor(
         public af: AngularFire,
-        private router : Router,
-        private userManager : UserManagerService
-        
+        private router: Router,
+        private userManager: UserManagerService
+
     ) {
         this.af.auth.subscribe(user => {
             if (user) {
-                
+
                 // user logged in
                 this.user.next(user);
                 this.isAuthenticated.next(true);
@@ -47,9 +47,9 @@ export class AuthService {
         this.af.auth.logout().then(res => this.isAuthenticated.next(false));
     }
 
-    private setAuth(){
+    private setAuth() {
         this.isAuthenticated.next(true);
-        
+
     }
 
     googleLogin() {
@@ -59,11 +59,21 @@ export class AuthService {
         }).then(res => this.setAuth());
     }
 
-    facebookLogin() {
-        this.af.auth.login({
-            method: AuthMethods.Popup,
-            provider: AuthProviders.Facebook
-        }).then(res => this.setAuth());
+    facebookLogin(): Promise<void> {
+        return new Promise<void>((resolve, reject) => {
+            this.af.auth.login({
+                method: AuthMethods.Popup,
+                provider: AuthProviders.Facebook
+            }).then(res => {
+                this.setAuth()
+                return resolve();
+            })
+                .catch((err) => {
+                    console.log(err);
+                    return reject(err);
+                });
+        })
+
     }
 
     twitterLogin() {
@@ -73,19 +83,19 @@ export class AuthService {
         }).then(res => this.setAuth());
     }
 
-    passwordLogin(user: UserLoginModel) : Promise<void> {
+    passwordLogin(user: UserLoginModel): Promise<void> {
         return new Promise<void>((resolve, reject) => {
             return this.af.auth.login({ email: user.user, password: user.password },
-            {
-                method: AuthMethods.Password,
-                provider: AuthProviders.Password
-            })
-            .then(res => {
-                this.setAuth();
-                return resolve();
-            })
-            .catch(() => reject());
-            });
+                {
+                    method: AuthMethods.Password,
+                    provider: AuthProviders.Password
+                })
+                .then(res => {
+                    this.setAuth();
+                    return resolve();
+                })
+                .catch(() => reject());
+        });
     }
 
     createUser(user: UserRegisterModel) {
@@ -95,31 +105,30 @@ export class AuthService {
             email: user.email,
             password: user.password
         })
-        .then((res)=> {
-            uid = res.uid;
-            this.passwordLogin(
-            {
-                user: user.email,
-                password: user.password
-            }).then(()=>
-                {
-                    this.userManager.registerToSlice({
-                        userName : uid,
-                        firstName : user.firstName,
-                        lastName : user.lastName,
-                        userEmail : user.email,
-                        callBackUrl: AppConfig.apiURL + "/savenewuseritems/" + uid 
-                    })
-            }
-            );
-        })
-        .catch((err : any)=> {
-            debugger; console.log(err.message);
-            if(err.code == "auth/email-already-in-use")
-                return "err:email-already-in-use";
-            else
-                return "err";
-        })
+            .then((res) => {
+                uid = res.uid;
+                this.passwordLogin(
+                    {
+                        user: user.email,
+                        password: user.password
+                    }).then(() => {
+                        this.userManager.registerToSlice({
+                            userName: uid,
+                            firstName: user.firstName,
+                            lastName: user.lastName,
+                            userEmail: user.email,
+                            callBackUrl: AppConfig.apiURL + "/savenewuseritems/" + uid
+                        })
+                    }
+                    );
+            })
+            .catch((err: any) => {
+                debugger; console.log(err.message);
+                if (err.code == "auth/email-already-in-use")
+                    return "err:email-already-in-use";
+                else
+                    return "err";
+            })
     }
 
 }
