@@ -29,7 +29,6 @@ export class AuthService {
     ) {
         this.af.auth.subscribe(user => {
             if (user) {
-
                 // user logged in
                 this.user.next(user);
                 this.isAuthenticated.next(true);
@@ -53,20 +52,31 @@ export class AuthService {
     }
 
     googleLogin() {
-        this.af.auth.login({
-            method: AuthMethods.Popup,
-            provider: AuthProviders.Google
-        }).then(res => this.setAuth());
+        return new Promise((resolve, reject) => {
+            this.af.auth.login({
+                method: AuthMethods.Popup,
+                provider: AuthProviders.Google
+            }).then(res => {
+                this.setAuth();
+                return resolve(res);
+            })
+                .catch((err) => {
+                    debugger
+                    console.log(err);
+                    return reject(err);
+                });
+        })
+
     }
 
-    facebookLogin(): Promise<void> {
-        return new Promise<void>((resolve, reject) => {
+    facebookLogin() {
+        return new Promise((resolve, reject) => {
             this.af.auth.login({
                 method: AuthMethods.Popup,
                 provider: AuthProviders.Facebook
-            }).then(res => {
+            }).then((res) => {
                 this.setAuth()
-                return resolve();
+                return resolve(res);
             })
                 .catch((err) => {
                     console.log(err);
@@ -77,10 +87,20 @@ export class AuthService {
     }
 
     twitterLogin() {
-        this.af.auth.login({
-            method: AuthMethods.Popup,
-            provider: AuthProviders.Twitter
-        }).then(res => this.setAuth());
+        return new Promise((resolve, reject) => {
+            this.af.auth.login({
+                method: AuthMethods.Popup,
+                provider: AuthProviders.Twitter
+            }).then((res) => {
+                this.setAuth()
+                return resolve(res);
+            })
+                .catch((err) => {
+                    console.log(err);
+                    return reject(err);
+                });
+        })
+
     }
 
     passwordLogin(user: UserLoginModel): Promise<void> {

@@ -9,46 +9,44 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">FashBash</a>
+      <a class="navbar-brand" href="#">FashBash</a>
 
-      
+
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-left">
-         <li>
+        <li>
           <a routerLink='/' routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Feed</a>
         </li>
-         <li>
-          <a routerLink='/Users/4'  routerLinkActive="active">Me</a>
+        <li>
+          <a [routerLink]="['/users',firebase_user.userName]"  routerLinkActive="active">Me</a>
         </li>
       </ul>
-      
-    
+
+
       <ul class="nav navbar-nav navbar-right">
         <li *ngIf="!(isLogedIn | async)" (click)="goToLogin();">
           <a>Login</a>
         </li>
         <li *ngIf="(isLogedIn | async)" (click)="logout();">
-          <a>Hello {{firebase_user.firstName }} |  Logout</a>
+          <a>Hello {{firebase_user.firstName || firebase_user.displayName }} |  Logout</a>
         </li>
       </ul>
 
-          <form class="navbar-form" >
+      <form class="navbar-form">
         <div class="form-group" style="display:inline;">
           <div class="input-group" id="search-box">
-            <input type="text" class="form-control" name="serachbar" (keyup)=search(searchBox.value) #searchBox >
+            <input type="text" class="form-control" name="serachbar" (keyup)=search(searchBox.value) #searchBox>
             <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
-             
-             <div id="auto-result">
-                 <div *ngFor="let user of usersSuggestions"
-                (click)="select(user)" class="search-result" >
-                  <img [src]="user.imageUrl">
-                  {{user.name}}
-               </div>
-             </div>
+
+            <div id="auto-result">
+              <div *ngFor="let user of usersSuggestions" (click)="select(user)" class="search-result">
+                <img [src]="user.imageUrl"> {{user.name}}
+              </div>
+            </div>
           </div>
-         
-         
+
+
         </div>
       </form>
     </div>

@@ -1,3 +1,4 @@
+import { SocailUserRegisterModel } from './../models/userLoginModel';
 import { AngularFire } from 'angularfire2';
 import { AuthService } from './auth-service.service';
 import { AppConfig } from './../config/appConfig';
@@ -63,8 +64,6 @@ export class UserManagerService {
       window.location.replace(redirectUrl);
     });
 
-    
-    
   }
-
+    
 }

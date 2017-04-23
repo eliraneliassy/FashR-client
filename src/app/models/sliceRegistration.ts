@@ -1,7 +1,10 @@
 export interface SliceRegistation{
     userName : string,
-    firstName: string,
-    lastName : string,
+    firstName?: string,
+    lastName? : string,
     userEmail : string,
-    callBackUrl : string
+    displayName? : string,
+    imageUrl?: string,
+    callBackUrl : string,
+    providerId?: number
 }

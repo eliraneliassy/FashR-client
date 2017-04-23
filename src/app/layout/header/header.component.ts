@@ -41,6 +41,7 @@ export class HeaderComponent implements OnInit {
         this.userService.getUser(user.uid).subscribe((res) => {
           if (res != null) {
             this.firebase_user = res;
+            console.log(this.firebase_user);
           }
         });
       }
