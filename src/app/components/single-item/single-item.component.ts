@@ -1,3 +1,4 @@
+import { DomSanitizer } from '@angular/platform-browser';
 import { Component, OnInit , Input } from '@angular/core';
 
 @Component({
@@ -8,9 +9,14 @@ import { Component, OnInit , Input } from '@angular/core';
 export class SingleItemComponent implements OnInit {
 
   @Input() item : any;
-  constructor() { }
+  private imageurl;
+  constructor(private sanitizer: DomSanitizer) { 
+    
+  }
 
   ngOnInit() {
+    this.imageurl = this.sanitizer.bypassSecurityTrustStyle(this.item.imageUrl);
+
   }
 
 }

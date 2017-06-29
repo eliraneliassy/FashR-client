@@ -1,9 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 
-body{
-    margin-top: 60px;
+@import "src/style_declaration/colors.scss";
+.btn-fash{
+    background-color:$fashbash-color;
+    color:#fff;
+    text-transform: uppercase;
 }
 
 .error-msg{
     color:red;
+}
+
+html,body{
+    font-family: 'Montserrat', sans-serif;
 }

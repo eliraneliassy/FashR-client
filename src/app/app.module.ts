@@ -20,6 +20,9 @@ import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { HomeComponent } from './pages/home/home.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { TabsComponent } from './components/tabs/tabs.component';
+import { FooterComponent } from './layout/footer/footer.component';
+
+
 
 
 @NgModule({
@@ -28,7 +31,8 @@ import { TabsComponent } from './components/tabs/tabs.component';
     HeaderComponent,
     HomeComponent,
     NotFoundComponent,
-    TabsComponent
+    TabsComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

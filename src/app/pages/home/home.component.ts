@@ -15,11 +15,13 @@ export class HomeComponent implements OnInit {
   page: number = 0;
   isLoad: boolean = false;
 
+
   ngOnInit() {
    
     this.feedService.getFeed(this.page)
       .subscribe((res)=>{
-        this.items = res;
+        this.items = res.slice(0,8);
+
       })
   }
 

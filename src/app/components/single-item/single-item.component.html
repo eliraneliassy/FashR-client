@@ -1,34 +1,23 @@
-  <div class="owl-item cloned active" style="width: 231px; margin-right: 0px; min-height: 307px;">
-    <div class="owl-item">
-      <div class="product  owl-item-slide">
-        <ul class="product-labels">
-          <li>hot</li>
-        </ul>
-        <div class="product-img-wrap">
-
-          <img class="product-img" [src]="item.imageUrl">
-        </div>
-        <a class="product-link" href="#"></a>
-        <div class="product-caption">
-          <ul class="product-caption-rating">
-            <li class="rated"><i class="glyphicon glyphicon-star"></i>
-            </li>
-            <li class="rated"><i class="glyphicon glyphicon-star"></i>
-            </li>
-            <li class="rated"><i class="glyphicon glyphicon-star"></i>
-            </li>
-            <li><i class="glyphicon glyphicon-star"></i>
-            </li>
-            <li><i class="glyphicon glyphicon-star"></i>
-            </li>
-          </ul>
-          <h5 class="product-caption-title">{{item.description}}</h5>
-          <div class="product-caption-price"><span class="product-caption-price-new">${{item.price/ 100}}</span>
-          </div>
-          <ul class="product-caption-feature-list">
-            <li>Free Shipping</li>
-          </ul>
-        </div>
-      </div>
+<div class="col-xs-12">
+  <div class="item-title truncate">
+    {{item.description}}
+  </div>
+  <div class="price">
+    <span> {{item.price / 100}}</span>
+    <div class="star">
+      <span class="glyphicon glyphicon-star-empty"></span>
     </div>
   </div>
+  <div class="item-box" [style.background-image]="'url(' + item.imageUrl + ')'">
+    
+  </div>
+  <div class="user-image">
+      <img src="https://scontent-frx5-1.xx.fbcdn.net/v/t1.0-9/10868161_10155037049905161_1481682574078948712_n.jpg?oh=449cec176a5992f424545b2414925982&oe=59C31066">
+      
+    </div>
+  
+  <div class="user-name">
+    {{item.userFullName || "User Name"}} 
+  </div>
+  
+</div>

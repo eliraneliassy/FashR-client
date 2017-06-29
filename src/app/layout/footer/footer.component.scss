@@ -1,0 +1,52 @@
+@import "../../../style_declaration/colors.scss";
+.links{
+    a{
+    font-size:16px;
+    color: #646161;
+    font-weight: 400;
+    text-decoration: none;
+    }
+    .smile{
+        padding-left: 30px;
+        margin-bottom: 10px;
+    }
+}
+.social-connect{
+    display: inline-block;
+    ul{
+        margin-top:10px;
+        list-style-type: none;
+
+        li{
+             display: inline-block;
+            i{
+                width: 55px; height: 70px;
+                display: inline-block;
+                background: url('/assets/images/social_logos.png');
+              }  
+            .twitter{
+                 
+            }
+            .facebook{
+                 background-position-x: -60px;
+            }
+            .instagram{
+                background-position-x: -120px;
+            }
+            .snapchat{
+                background-position-x: -180px;
+            }
+        }
+        
+        
+    }
+}
+
+.fash-image{
+    text-align: center;
+    span{
+        font-family: 'Montserrat', sans-serif;
+        padding:20px 0;
+        font-weight: 500;
+    }
+}
