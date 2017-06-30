@@ -25,6 +25,7 @@ import { FooterComponent } from './layout/footer/footer.component';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,

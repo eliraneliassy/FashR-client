@@ -1,9 +1,31 @@
-.user-top{
-    background-color: gray;
+@import "../../../../style_declaration/colors.scss";
+
+
+.userDeatils{
+    min-height: 200px;
+    background-color: $inner-background;
+    text-align: center;
+    font-size:16px;
+    color:#000;
+
+    .txt{
+        vertical-align: middle;
+        padding-top: 50px;
+        .part{
+            padding-top: 10px;
+        }
+    }
+
+    .user-name{
+        font-weight: bold;
+        padding-left: 10px;
+    }
+  
     .user-img{
         img{
             width:200px;
             height: 200px;
         }
+          
     }
 }

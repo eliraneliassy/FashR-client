@@ -5,6 +5,27 @@
     background-color:$fashbash-color;
     color:#fff;
     text-transform: uppercase;
+    border: 0px;
+}
+
+.btn-fash:hover{
+    background-color: $fashbash-color;
+}
+
+.btn-fash-grey,
+.btn-fash-grey:hover{
+    background-color: #d9d9d9;
+    border:0;
+}
+
+
+
+.fashcolors{
+    color:$fashbash-color;
+}
+
+.innter-background{
+    background-color: $inner-background;
 }
 
 .error-msg{
