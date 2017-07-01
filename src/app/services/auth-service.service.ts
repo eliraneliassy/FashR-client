@@ -3,8 +3,10 @@ import { UserManagerService } from './user-manager-service.service';
 import { Router } from '@angular/router';
 import { UserLoginModel, UserRegisterModel } from './../models/userLoginModel';
 import { Injectable } from '@angular/core';
-import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { BehaviorSubject, Observable } from 'rxjs';
+import * as firebase from 'firebase/app';
+
 
 
 @Injectable()
@@ -15,35 +17,25 @@ export class AuthService {
         return this.isAuthenticated.asObservable();
     }
 
-    user: any = new BehaviorSubject({});
-    getUser(): Observable<any> {
-        return this.user.asObservable();
+    // user: any = new BehaviorSubject({});
+    getUser(): Observable<firebase.User> {
+        return this.user;
     }
+
+    private user: Observable<firebase.User>;
 
 
     constructor(
-        public af: AngularFire,
+        public af: AngularFireAuth,
         private router: Router,
         private userManager: UserManagerService
 
     ) {
-        this.af.auth.subscribe(user => {
-            if (user) {
-                // user logged in
-                this.user.next(user);
-                this.isAuthenticated.next(true);
-            }
-            else {
-                // user not logged in
-                this.user.next({});
-                this.isAuthenticated.next(false);
-
-            }
-        });
+        this.user = this.af.authState;
     }
 
     logout() {
-        this.af.auth.logout().then(res => this.isAuthenticated.next(false));
+        this.af.auth.signOut();
     }
 
     private setAuth() {
@@ -53,13 +45,11 @@ export class AuthService {
 
     googleLogin() {
         return new Promise((resolve, reject) => {
-            this.af.auth.login({
-                method: AuthMethods.Popup,
-                provider: AuthProviders.Google
-            }).then(res => {
-                this.setAuth();
-                return resolve(res);
-            })
+            this.af.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
+                .then(res => {
+                    this.setAuth();
+                    return resolve(res);
+                })
                 .catch((err) => {
                     debugger
                     console.log(err);
@@ -71,13 +61,11 @@ export class AuthService {
 
     facebookLogin() {
         return new Promise((resolve, reject) => {
-            this.af.auth.login({
-                method: AuthMethods.Popup,
-                provider: AuthProviders.Facebook
-            }).then((res) => {
-                this.setAuth()
-                return resolve(res);
-            })
+            this.af.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
+                .then((res) => {
+                    this.setAuth()
+                    return resolve(res);
+                })
                 .catch((err) => {
                     console.log(err);
                     return reject(err);
@@ -88,13 +76,11 @@ export class AuthService {
 
     twitterLogin() {
         return new Promise((resolve, reject) => {
-            this.af.auth.login({
-                method: AuthMethods.Popup,
-                provider: AuthProviders.Twitter
-            }).then((res) => {
-                this.setAuth()
-                return resolve(res);
-            })
+            this.af.auth.signInWithPopup(new firebase.auth.TwitterAuthProvider())
+                .then((res) => {
+                    this.setAuth()
+                    return resolve(res);
+                })
                 .catch((err) => {
                     console.log(err);
                     return reject(err);
@@ -105,11 +91,7 @@ export class AuthService {
 
     passwordLogin(user: UserLoginModel): Promise<void> {
         return new Promise<void>((resolve, reject) => {
-            return this.af.auth.login({ email: user.user, password: user.password },
-                {
-                    method: AuthMethods.Password,
-                    provider: AuthProviders.Password
-                })
+            return this.af.auth.signInWithEmailAndPassword(user.user, user.password)
                 .then(res => {
                     this.setAuth();
                     return resolve();
@@ -120,11 +102,7 @@ export class AuthService {
 
     createUser(user: UserRegisterModel) {
         let uid;
-        this.af.auth.createUser({
-            // Create user
-            email: user.email,
-            password: user.password
-        })
+        this.af.auth.createUserWithEmailAndPassword(user.email, user.password)
             .then((res) => {
                 uid = res.uid;
                 this.passwordLogin(

@@ -1,5 +1,4 @@
 import { SocailUserRegisterModel } from './../models/userLoginModel';
-import { AngularFire } from 'angularfire2';
 import { AuthService } from './auth-service.service';
 import { AppConfig } from './../config/appConfig';
 import { SliceRegistation } from './../models/sliceRegistration';
@@ -11,8 +10,7 @@ export class UserManagerService {
 
   user : any = {};
 
-  constructor(private http: Http,
-  private firebaseService: AngularFire) { 
+  constructor(private http: Http) { 
     
   }
 

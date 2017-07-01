@@ -36,7 +36,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
 
-    this.auth.user.subscribe(user => {
+    this.auth.getUser().subscribe(user => {
       if (Object.keys(user).length !== 0) {
         this.userService.getUser(user.uid).subscribe((res) => {
           if (res != null) {
