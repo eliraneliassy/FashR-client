@@ -11,25 +11,42 @@
       </button>
       <a class="navbar-brand" routerLink="/">
         <img src="/assets/images/logo.png" >
+            
+
       </a>
+
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
+
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-          
-          <button class="btn btn-primary" [routerLink]="'/login'">
+      <div *ngIf="!isAuth">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+
+            <button class="btn btn-primary" [routerLink]="'/login'">
           <img src="/assets/images/icon-2.png">
           Sign In
           </button></li>
-        <li>
-          <button class="btn btn-primary" [routerLink]="'/login/register'">
+          <li>
+            <button class="btn btn-primary" [routerLink]="'/login/register'">
           <img src="/assets/images/icon-no.png">
           Join FASHBASH
           </button>
-        </li>
-      </ul>
+          </li>
+        </ul>
+      </div>
+      <div *ngIf="isAuth">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+
+            <button class="btn btn-primary" (click)="logout()">
+          <img src="/assets/images/icon-2.png">
+            Logout
+          </button></li>
+          <li>
+        </ul>
+      </div>
     </div>
     <!-- /.navbar-collapse -->
   </div>

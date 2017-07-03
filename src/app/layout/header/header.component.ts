@@ -15,8 +15,8 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  isLogedIn: Observable<boolean>;
-  firebase_user: any = {};
+  isAuth: boolean = false;
+  firebase_user: any = null;
   user: any;
 
   private searchTerms = new Subject<string>();
@@ -29,19 +29,18 @@ export class HeaderComponent implements OnInit {
     private userService: UserManagerService,
     private suggestionsService: SuggestionsService) {
 
-    this.isLogedIn = this.auth.isLoggedIn();
-  
+
 
   }
 
   ngOnInit() {
 
-    this.auth.getUser().subscribe(user => {
-      if (Object.keys(user).length !== 0) {
+    this.auth.user.subscribe(user => {
+      if (user != null) {
         this.userService.getUser(user.uid).subscribe((res) => {
           if (res != null) {
             this.firebase_user = res;
-            console.log(this.firebase_user);
+            this.isAuth = true;
           }
         });
       }
@@ -50,7 +49,7 @@ export class HeaderComponent implements OnInit {
     this.searchTerms.debounceTime(300)
       .distinctUntilChanged()
       .subscribe(searchTextValue => {
-        if(searchTextValue == "") {
+        if (searchTextValue == "") {
           this.usersSuggestions = [];
           return;
         }
@@ -60,7 +59,7 @@ export class HeaderComponent implements OnInit {
             if (res) {
               res.forEach(element => {
                 this.usersSuggestions.push(
-                  { 'name': element.firstName + " " + element.lastName, 'imageUrl': element.imageUrl, 'uid':element.userName }
+                  { 'name': element.firstName + " " + element.lastName, 'imageUrl': element.imageUrl, 'uid': element.userName }
                 )
               });
             }
@@ -70,7 +69,13 @@ export class HeaderComponent implements OnInit {
 
 
   logout() {
-    this.auth.logout();
+    debugger
+    this.auth.logout()
+      .then(() => {
+        this.isAuth = false;
+      }
+
+      );
 
   }
 
@@ -83,7 +88,7 @@ export class HeaderComponent implements OnInit {
   }
 
   select(user) {
-    this.router.navigate(['/users/'+user.uid]);
+    this.router.navigate(['/users/' + user.uid]);
     this.usersSuggestions = [];
 
   }

@@ -22,7 +22,11 @@ export class AuthService {
         return this.user;
     }
 
-    private user: Observable<firebase.User>;
+    private setAuth() {
+        this.isAuthenticated.next(true);
+    }
+
+    public user: Observable<firebase.User>;
 
 
     constructor(
@@ -32,15 +36,14 @@ export class AuthService {
 
     ) {
         this.user = this.af.authState;
+        // .subscribe(user=>{
+        //     console.log(user);
+        // });
+        
     }
 
     logout() {
-        this.af.auth.signOut();
-    }
-
-    private setAuth() {
-        this.isAuthenticated.next(true);
-
+        return this.af.auth.signOut();
     }
 
     googleLogin() {
@@ -89,15 +92,16 @@ export class AuthService {
 
     }
 
-    passwordLogin(user: UserLoginModel): Promise<void> {
-        return new Promise<void>((resolve, reject) => {
-            return this.af.auth.signInWithEmailAndPassword(user.user, user.password)
-                .then(res => {
-                    this.setAuth();
-                    return resolve();
-                })
-                .catch(() => reject());
-        });
+    passwordLogin(user: UserLoginModel) {
+        // return new Promise<void>((resolve, reject) => {
+        //     return this.af.auth.signInWithEmailAndPassword(user.user, user.password)
+        //         .then(res => {
+        //             this.setAuth();
+        //             return resolve();
+        //         })
+        //         .catch(() => reject());
+        // });
+         return this.af.auth.signInWithEmailAndPassword(user.user, user.password);
     }
 
     createUser(user: UserRegisterModel) {

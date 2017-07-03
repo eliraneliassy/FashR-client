@@ -36,8 +36,9 @@ export class UserPageComponent implements OnInit, OnDestroy {
 
   private loadUserDetails() {
     let currentUser;
-    this.authService.getUser().subscribe((res) => {
-      if (res.uid != undefined) {
+    this.authService.user.subscribe((res) => {
+      debugger
+      if (res != null && res.uid != undefined) {
         currentUser = res.uid;
         if(res.uid == this.userId){
           this.self = true;

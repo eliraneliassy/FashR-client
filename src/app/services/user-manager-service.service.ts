@@ -25,7 +25,7 @@ export class UserManagerService {
     }
 
     getUser(uid : string){
-      return this.http.get(AppConfig.apiURL + "/users/user?userName=" + uid)
+      return this.http.get(AppConfig.apiURL + "/users/getuser?userName=" + uid)
         .map((res) => res.json())
         
     }
