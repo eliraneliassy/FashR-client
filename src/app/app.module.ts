@@ -45,7 +45,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
     routing,
     SharedModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule
+    AngularFireAuthModule,
 
   ],
   providers: [AuthService, UserManagerService, FeedService, SocialManagerService, SuggestionsService, AuthGuardService],

@@ -1,0 +1,103 @@
+@import "../../../../style_declaration/colors.scss";
+
+
+p{
+    line-height: 180%;
+}
+.about-txt{
+    margin: 0 auto;
+    width:600px;
+
+    h2{
+        text-align: center;
+    }
+
+    p{
+        margin-top:20px;
+        font-size: 12px;
+    }
+
+    p:last-child{
+        text-align: center;
+        font-weight: 600;
+        font-size:14px;
+        font-style: italic;
+    }
+}
+
+.walls{
+    width:600px;
+    margin: 0 auto;
+    margin-top: 30px;
+    text-align: center;
+
+    .wall{
+        height: 70px;
+        width: 5px;
+        display: inline-block;
+        margin-right: 5px;
+    }
+
+    .fash{
+        background-color: $fashbash-color;
+    }
+
+    .black{
+        background-color: #000;
+    }
+}
+
+.answer{
+    
+    padding: 60px 0;
+    background-color: $fashbash-color;
+    color:#fff;
+
+    h3{
+        font-size:18px;
+    }
+
+    p{
+        font-size: 14px;
+    }
+
+    .cont{
+        margin:0 auto;
+        width:600px;
+        text-align: center;
+
+    }
+}
+
+.mainimg{
+
+    .cont{
+        width:600px;
+        margin: 0 auto;
+        img{
+            width:100%;
+        }
+    }
+}
+
+.bottom-txt{
+    
+    width:600px;
+    text-align: center;
+    margin:0 auto;
+    font-size: 12px;
+    p.bold{
+        font-weight: 600;
+    }
+    p:last-child{
+        margin-top:20px;
+        font-size: 14px;
+    }
+
+}
+
+.btmimg{
+    img{
+        width:100%;
+    }
+}

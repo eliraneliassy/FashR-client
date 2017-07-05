@@ -20,7 +20,7 @@
                 {{user.countFollowers}}
           </span>
         </div>
-         <div class="part user-count-items">
+        <div class="part user-count-items">
           <span>Items</span>
           <span class="fashcolors">
              {{user.countItems || 0}}
@@ -52,18 +52,25 @@
     </div>
   </div>
 </div>
-
-
-<div class="container text-center">
-
-  <div class="col-xs-12">
-    <div class="col-xs-4 tab">My Purchases</div>
-    <div class="col-xs-4 tab">The Feed</div>
-    <div class="col-xs-4 tab">People I Follow</div>
-  </div>
-
-
-</div>
+<!--<div class="container tabs">
+  <ngb-tabset >
+    <ngb-tab title="One" class="col-xs-4">
+      <ng-template ngbTabContent>
+        <p>These tabs are displayed as pills...</p>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab title="Two" class="col-xs-4">
+      <ng-template ngbTabContent>
+        <p>Because default values have been customized.</p>
+      </ng-template>
+    </ngb-tab>
+     <ngb-tab title="tree" class="col-xs-4">
+      <ng-template ngbTabContent>
+        <p>Because default values have been customized.</p>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+</div>-->
 <div class="col-xs-12 text-center">
   <h2>{{user.userDeatiles?.firstName}} Items:</h2>
 </div>

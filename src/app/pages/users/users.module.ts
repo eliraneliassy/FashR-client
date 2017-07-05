@@ -15,7 +15,6 @@ import { UsersComponent } from './users/users.component';
     CommonModule,
     userRouting,
     SharedModule,
-
   ],
   declarations: [
     UserPageComponent, 

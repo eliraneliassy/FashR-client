@@ -8,6 +8,7 @@ const APP_ROUTES: Routes = [
     { path: '', component: HomeComponent },
     { path: 'login', loadChildren: 'app/pages/login/login.module#LoginModule' },
     { path: 'users', loadChildren: 'app/pages/users/users.module#UsersModule' },
+    { path: 'static', loadChildren: 'app/pages/static-pages/static-pages.module#StaticPagesModule' },
     {path:'404' , component: NotFoundComponent},
     {path:'**', redirectTo:'/404'}
 

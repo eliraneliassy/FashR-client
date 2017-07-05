@@ -11,9 +11,25 @@
       </button>
       <a class="navbar-brand" routerLink="/">
         <img src="/assets/images/logo.png" >
-            
-
       </a>
+
+       <form class="navbar-form">
+        <div class="form-group" style="display:inline;">
+          <div class="input-group" id="search-box">
+            <input type="text" class="form-control" name="serachbar" (keyup)=search(searchBox.value) 
+            placeholder="Search for people, brands and items here..." #searchBox>
+            <img class="magni" src="./assets/images/search.png">
+            <div id="auto-result">
+              <div *ngFor="let user of usersSuggestions" (click)="select(user)" class="search-result">
+                <img [src]="user.imageUrl">
+                <span class="userName">{{user.name}}</span>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </form>
 
     </div>
 

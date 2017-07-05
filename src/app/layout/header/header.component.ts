@@ -5,7 +5,7 @@ import { Http, Headers } from '@angular/http';
 import { Observable, Subject } from 'rxjs';
 import { LoginComponent } from './../../pages/login/login/login.component';
 import { AuthService } from './../../services/auth-service.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,7 +13,11 @@ import { Router } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
+  
+  ngOnDestroy(): void {
+    this.searchTerms.unsubscribe();
+  }
 
   isAuth: boolean = false;
   firebase_user: any = null;
