@@ -1,0 +1,26 @@
+.cont{
+    background: #f3fbfb;
+    cursor: pointer;
+    
+}
+
+.plus{
+    display: inline-block;
+    float:right;
+    color:#000;
+    font-size:20px;
+    cursor: pointer;
+}
+
+.question{
+    display: inline-block;
+    padding:20px 40px;
+    width:100%;
+    color:#67cacc;
+    font-weight: 500;
+    font-size:16px;
+}
+
+.answer{
+    padding:0px 40px 40px 40px;
+}

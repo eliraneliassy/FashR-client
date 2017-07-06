@@ -1,0 +1,13 @@
+<div class="cont" (click)="plus = !plus">
+  <div class="question">
+    {{question}}
+    <div class="plus">
+      <span *ngIf="plus">-</span>
+      <span *ngIf="!plus">+</span>
+    </div>
+  </div>
+
+  <div class="answer" *ngIf="plus">
+    {{answer}}
+  </div>
+</div>

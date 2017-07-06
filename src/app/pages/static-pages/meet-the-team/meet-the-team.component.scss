@@ -1,0 +1,59 @@
+h2{
+    margin-bottom: 25px;
+}
+.person{
+    width:700px;
+    margin:30px auto;
+    margin-bottom: 50px;
+
+    .name{
+        font-weight: 600;
+    }
+
+    p{
+        margin:0px;
+        margin-top:5px;
+    }
+
+    .email{
+        margin-top:10px;
+    }
+
+    .matan{
+        background-image: url('/assets/images/matan.png');
+    }
+
+    .eliran{
+        background-image: url('/assets/images/eliran.jpg');
+    }
+    .person-img{
+        text-align: center;
+        
+        background-size: cover;
+        background-position: 50% 50%;
+        height: 300px;
+        position: relative;
+        span{
+            position: absolute;
+            bottom: -70px;
+            left:5%;
+            font-size: 100px;
+            font-weight: 600;
+        }
+        .fa{
+            position: absolute;
+            bottom: -35px;
+            
+        }
+        .fa-twitter{
+            left:60%;
+        }
+        .fa-linkedin{
+            left:80%;
+        }
+        img{
+            
+        height: 300px;
+        }
+    }
+}
