@@ -25,10 +25,12 @@
               name="firstName"
                placeholder="First Name"
                ngModel
-               required>
+               required
+               #firstName="ngModel"
+               >
           </div>
         
-          <span class="help-block"></span>
+          <span class="help-block err" *ngIf="!firstName.valid && firstName.touched && firstName.errors['required']">Please enter your first name.</span>
 
            <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-user"></i></span>
@@ -37,10 +39,11 @@
               name="lastName"
                placeholder="Last Name"
                ngModel
-               required>
+               required
+               #lastName="ngModel">
           </div>
         
-          <span class="help-block"></span>
+          <span class="help-block err" *ngIf="!lastName.valid && lastName.touched && lastName.errors['required']">Please enter your last name.</span>
 
           <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-user"></i></span>
@@ -50,10 +53,12 @@
                placeholder="Email address"
                ngModel
                required 
-               pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?">
+               email
+               #email="ngModel">
           </div>
         
-          <span class="help-block"></span>
+          <span class="help-block err" *ngIf="!email.valid && email.touched && email.errors['required']">Please enter your email.</span>
+          <span class="help-block err" *ngIf="!email.valid && email.touched && email.errors['email'] && !email.errors['required']">Please enter correct email.</span>
 
           <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-lock"></i></span>
@@ -64,11 +69,14 @@
                #pass="ngModel"
                ngModel
                pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$"
+               required
+
                >
           </div>
-            <span class="help-block"></span>
-          <!--<span class="help-block" *ngIf="pass.errors?.required">Please enter password.</span>
-          <span class="help-block" *ngIf="pass.errors?.pattern">Password has to be a minimum of 6 characters at least 1 Alphabet and 1 Number.</span>-->
+            
+          <span class="help-block" *ngIf="!pass.valid && pass.touched && pass.errors?.required">Please enter password.</span>
+          <span class="help-block" *ngIf="!pass.valid && pass.touched && pass.errors?.pattern">Password has to be a minimum of 6 characters at least 1 Alphabet and 1 Number.</span>
+
           <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-lock"></i></span>
             <input type="password"
@@ -76,13 +84,15 @@
               name="confirmPassword"
                placeholder="Confirm Password"
                ngModel
-               validateEqual="password">
+               #confirmPass="ngModel"
+               validateEqual="pass"
+               required>
           </div>
           <span class="help-block" *ngIf="passwordValid==false">
             Password dosen't match
             </span>
-  <span class="help-block"></span>
-          <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+            <span class="help-block" *ngIf="!confirmPass.valid && confirmPass.touched && confirmPass.errors?.required">Please confirm your password.</span>
+          <button class="btn btn-fash btn-block" type="submit" [disabled]="!f.valid">Register</button>
         </form>
       </div>
     </div>

@@ -24,14 +24,19 @@
           <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-user"></i></span>
             <input
-             type="text"
+             type="email"
               class="form-control"
                name="user"
                 placeholder="email address"
                  ngModel
-                 required>
+                 #email="ngModel"
+                 required
+                 email 
+                 >
           </div>
-          <span class="help-block"></span>
+          <span class="help-block err" *ngIf="!email.valid && email.touched && email.errors['required']">Please enter your email.</span>
+          <span class="help-block err" *ngIf="!email.valid && email.touched && email.errors['email'] && !email.errors['required']">Please enter correct email.</span>
+          
 
           <div class="input-group">
             <span class="input-group-addon"><i class="fa fa-lock"></i></span>
@@ -40,11 +45,15 @@
               name="password"
                placeholder="Password"
                ngModel
-               required>
-          </div>
-          <span class="help-block"></span>
+               required
+               #pass="ngModel"
+               >
 
-          <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+          </div>
+          <span class="help-block err" *ngIf="!pass.valid && pass.touched && pass.errors['required']">Please enter your password.</span>
+          
+
+          <button class="btn btn-fash btn-block" type="submit" [disabled]="!f.valid">Login</button>
         </form>
       </div>
     </div>

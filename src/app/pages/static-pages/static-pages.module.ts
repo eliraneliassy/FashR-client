@@ -9,6 +9,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { MeetTheTeamComponent } from './meet-the-team/meet-the-team.component';
 import { FaqComponent } from './faq/faq.component';
 import { QnaComponent } from './faq/qna/qna.component';
+import { TermsComponent } from './terms/terms.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,7 @@ import { QnaComponent } from './faq/qna/qna.component';
     
   ],
   
-  declarations: [SayHelloComponent, AboutUsComponent, MeetTheTeamComponent, FaqComponent, QnaComponent],
+  declarations: [SayHelloComponent, AboutUsComponent, MeetTheTeamComponent, FaqComponent, QnaComponent, TermsComponent],
   providers:[EmailService]
 })
 export class StaticPagesModule { }

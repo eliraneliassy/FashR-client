@@ -6,10 +6,17 @@
     color:#fff;
     text-transform: uppercase;
     border: 0px;
+    padding:15px;
 }
+
 
 .btn-fash:hover{
     background-color: $fashbash-color;
+    color:#fff !important;
+}
+
+.btn-fash:disabled{
+    opacity: 0.35;
 }
 
 .btn-fash-grey,
@@ -30,6 +37,21 @@
 
 .error-msg{
     color:red;
+}
+
+
+    input.ng-invalid.ng-touched,
+    textarea.ng-invalid.ng-touched{
+        border:1px solid red;
+    }
+
+    input.ng-valid.ng-touched,
+    textarea.ng-valid.ng-touched{
+        border:1px solid $fashbash-color;
+    }
+
+    .input-group{
+	margin-bottom: 15px;
 }
 
 html,body{

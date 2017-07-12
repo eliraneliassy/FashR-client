@@ -1,9 +1,28 @@
 @import "../../../style_declaration/colors.scss";
 
 .hero{
-    min-height: 400px;
+    min-height: 430px;
     text-align: center;
 
+    position: relative;
+
+    .persons{
+        position: absolute;
+        top:0;
+        left:0;
+        width:160px;
+    }
+
+    .right{
+        right:0;
+        left:initial;
+    }
+
+    @media (max-width:1200px){
+        .person{
+            display: none;
+        }
+    }
     .hero-text{
         font-family: 'Montserrat', sans-serif;
         font-size: 30px;

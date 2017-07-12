@@ -16,7 +16,7 @@ export class SayHelloComponent implements OnInit {
   ngOnInit() {
   }
 
-  obSubmit(form: NgForm){
+  onSubmit(form: NgForm){
     let contactUs : ContactUs =
     {
       firstName : form.value.firstName,

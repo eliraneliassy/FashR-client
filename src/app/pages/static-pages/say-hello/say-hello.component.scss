@@ -69,8 +69,27 @@
         margin: 0 auto;
     }
 
+    .form-group{
+        position: relative;
+
+        .icn_placholder{
+            position: absolute;
+            top:2px;
+            left:26px;
+        }
+    }
+
+
+
     input{
         display: inline-block;
+        padding: 18px 0;
+        padding-left: 40px;
+    }
+
+    textarea{
+        padding:15px 0;
+        padding-left: 40px;
     }
 
     .help-block{
@@ -78,10 +97,6 @@
         color:red;
     }
 
-    input.ng-invalid.ng-touched,
-    textarea.ng-invalid.ng-touched{
-        border:1px solid red;
-    }
 
     textarea{
         margin-top: 20px;

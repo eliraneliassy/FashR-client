@@ -40,6 +40,13 @@ button:focus {
     margin-left: 20px;
 }
 
+@media (max-width: 768px){
+    .navbar-form{
+    margin-left: 20px;
+    display: none;
+}
+}
+
 #navbar{
     .active{
         background-color: cornflowerblue;

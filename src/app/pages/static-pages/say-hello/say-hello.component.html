@@ -27,32 +27,38 @@
 
 <div class="contact">
   <div class="container">
-    <form (ngSubmit)="obSubmit(f)" #f="ngForm">
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
       <div class="col-xs-12">
         <div class="form-group col-xs-6">
           <input type="text" placeholder="First Name" class="form-control" ngModel name="firstName" required #firstName="ngModel">
+          <span class="icn_placholder"><img src="./assets/images/contact/person_icon.png"></span>
           <span class="help-block err" *ngIf="!firstName.valid && firstName.touched">Please enter your first name.</span>
         </div>
         <div class="form-group col-xs-6">
           <input type="text" placeholder="Last Name" class="form-control" ngModel name="lastName" required #lastName="ngModel">
+          <span class="icn_placholder"><img src="./assets/images/contact/person_icon.png"></span>
           <span class="help-block err" *ngIf="!lastName.valid && lastName.touched">Please enter your last name.</span>
         </div>
       </div>
       <div class="col-xs-12">
         <div class="form-group col-xs-6">
           <input type="email" placeholder="Email" class="form-control" ngModel name="email" required email #email="ngModel">
+          <span class="icn_placholder" style="left:23px"><img src="./assets/images/contact/mail_icon.png"></span>
           <span class="help-block err" *ngIf="!email.valid && email.touched && email.errors['required']">Please enter your email.</span>
           <span class="help-block err" *ngIf="!email.valid && email.touched && email.errors['email'] && !email.errors['required']">Please enter correct email.</span>
         </div>
         <div class="form-group col-xs-6">
           <input type="text" placeholder="Subject" class="form-control" ngModel name="subject" required #subject="ngModel">
-          <span class="help-block err" *ngIf="!subject.valid && subject.touched">Please enter your message.</span>
+          <span class="icn_placholder" style="left:21px"><img src="./assets/images/contact/msg_icon.png"></span>
+          <span class="help-block err" *ngIf="!subject.valid && subject.touched">Please enter your Subject.</span>
           
         </div>
       </div>
 
       <div class="form-group col-xs-12">
         <textarea placeholder="Message" class="form-control" ngModel name="msg" required #msg="ngModel"></textarea>
+        <span class="icn_placholder" style="top:30px; left:24px;"><img src="./assets/images/contact/msg_icon.png"></span>
+        <span class="help-block err" *ngIf="!msg.valid && msg.touched">Please enter your message.</span>
       </div>
       <div class="col-xs-12">
         <button class="btn" [disabled]="!f.valid">Send</button>
