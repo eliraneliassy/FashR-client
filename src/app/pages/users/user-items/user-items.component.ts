@@ -44,24 +44,6 @@ export class UserItemsComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnInit() {
-    // this.authService.user.subscribe(user => {
-    //   if (user) {
-    //     this.userM.getUser(user.uid).subscribe((res) => {
-    //       if (res != null) {
-    //         this.firebaseUser = res;
-    //       }
-    //     })
-
-    //     this.userId = user;
-    //     this.feedService.getUsersFeed(user.uid, 0)
-    //       .subscribe((res) => {
-    //         this.items = res;
-    //       })
-
-    //   }
-    // });
-
-
     this.getFeed();
   }
 

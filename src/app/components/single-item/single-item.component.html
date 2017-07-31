@@ -17,7 +17,9 @@
   </div>
 
   <div *ngIf="bottom" class="user-name">
+    <a (click)="goToUser()">
     {{user?.firstName +" " + user?.lastName}}
+    </a>
   </div>
 
 </div>

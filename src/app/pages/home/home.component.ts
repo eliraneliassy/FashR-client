@@ -11,7 +11,7 @@ import { Component, OnInit, HostListener, Inject, ViewChild, ElementRef } from '
 })
 export class HomeComponent implements OnInit {
 
-  private isAuth: boolean = false;
+  isAuth: boolean = false;
  
   constructor(private feedService: FeedService,
     private auth: AuthService) {
@@ -37,6 +37,6 @@ export class HomeComponent implements OnInit {
       })
   }
 
-  
+   
 
 }

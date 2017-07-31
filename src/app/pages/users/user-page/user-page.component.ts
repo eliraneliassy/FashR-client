@@ -16,10 +16,10 @@ export class UserPageComponent implements OnInit, OnDestroy {
 
   userId: string;
   paramsSubscription: Subscription;
-  private user : any ={};
+  user : any ={};
 
   self: boolean = false;
-  private mouseOvered: boolean = false;
+  mouseOvered: boolean = false;
 
 
   constructor(private route: ActivatedRoute,

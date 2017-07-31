@@ -1,3 +1,4 @@
+import { NavigationExtras, Router } from '@angular/router';
 import { UserManagerService } from './../../services/user-manager-service.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Component, OnInit , Input } from '@angular/core';
@@ -13,10 +14,13 @@ export class SingleItemComponent implements OnInit {
   @Input() bottom: boolean = false;
   @Input() userDetails : boolean = false;
   private imageurl;
-  private user;
+  user = {
+    userName: ""
+  };
 
   constructor(private sanitizer: DomSanitizer,
-  private userM : UserManagerService) { 
+  private userM : UserManagerService,
+private router: Router) { 
     
   }
 
@@ -26,9 +30,14 @@ export class SingleItemComponent implements OnInit {
       this.userM.getUser(this.item.userName)
       .subscribe((res)=>{
         this.user = res;
+        console.log(this.user);
       })
     }
 
+  }
+
+  goToUser(){
+    this.router.navigate(['users',this.user.userName]);
   }
 
 }

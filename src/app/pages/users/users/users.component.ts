@@ -6,8 +6,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 
 export interface ICounts{
-    countItems : number,
-    countUsers : number
+    itemsCount : number,
+    usersCount : number
 }
 
 @Component({
@@ -25,10 +25,12 @@ export class UsersComponent implements OnInit, OnDestroy {
   mock:any = [{"userDeatiles":{"userName":"2SarfRN3Geh5rPRNXdjH3ym5FCu1","updateTime":0,"firstName":"Matan","lastName":"Evrany","displayName":null,"linkedAccounts":null,"userEmail":"mevrany@gmail.com","mailboxes":null,"href":null,"createTime":0,"lastScanTime":1496669331593,"zipCode":-1,"imageUrl":"https://scontent-frx5-1.xx.fbcdn.net/v/t1.0-9/12108297_10156149993640088_6462030065644528290_n.jpg?oh=b411718a4818c6a2a4b3710883ce8141&oe=59D47E21","countFollowing":0,"providerId":-1},"countFollowers":1,"countFollowing":0,"countItems":476,"moneySpent":1692427,"isFollowed":true},{"userDeatiles":{"userName":"2SarfRN3Geh5rPRNXdjH3ym5FCu1","updateTime":0,"firstName":"Matan","lastName":"Evrany","displayName":null,"linkedAccounts":null,"userEmail":"mevrany@gmail.com","mailboxes":null,"href":null,"createTime":0,"lastScanTime":1496669331593,"zipCode":-1,"imageUrl":"https://scontent-frx5-1.xx.fbcdn.net/v/t1.0-9/12108297_10156149993640088_6462030065644528290_n.jpg?oh=b411718a4818c6a2a4b3710883ce8141&oe=59D47E21","countFollowing":0,"providerId":-1},"countFollowers":1,"countFollowing":0,"countItems":476,"moneySpent":1692427,"isFollowed":true},{"userDeatiles":{"userName":"2SarfRN3Geh5rPRNXdjH3ym5FCu1","updateTime":0,"firstName":"Matan","lastName":"Evrany","displayName":null,"linkedAccounts":null,"userEmail":"mevrany@gmail.com","mailboxes":null,"href":null,"createTime":0,"lastScanTime":1496669331593,"zipCode":-1,"imageUrl":"https://scontent-frx5-1.xx.fbcdn.net/v/t1.0-9/12108297_10156149993640088_6462030065644528290_n.jpg?oh=b411718a4818c6a2a4b3710883ce8141&oe=59D47E21","countFollowing":0,"providerId":-1},"countFollowers":1,"countFollowing":0,"countItems":476,"moneySpent":1692427,"isFollowed":true},{"userDeatiles":{"userName":"2SarfRN3Geh5rPRNXdjH3ym5FCu1","updateTime":0,"firstName":"Matan","lastName":"Evrany","displayName":null,"linkedAccounts":null,"userEmail":"mevrany@gmail.com","mailboxes":null,"href":null,"createTime":0,"lastScanTime":1496669331593,"zipCode":-1,"imageUrl":"https://scontent-frx5-1.xx.fbcdn.net/v/t1.0-9/12108297_10156149993640088_6462030065644528290_n.jpg?oh=b411718a4818c6a2a4b3710883ce8141&oe=59D47E21","countFollowing":0,"providerId":-1},"countFollowers":1,"countFollowing":0,"countItems":476,"moneySpent":1692427,"isFollowed":true},{"userDeatiles":{"userName":"2SarfRN3Geh5rPRNXdjH3ym5FCu1","updateTime":0,"firstName":"Matan","lastName":"Evrany","displayName":null,"linkedAccounts":null,"userEmail":"mevrany@gmail.com","mailboxes":null,"href":null,"createTime":0,"lastScanTime":1496669331593,"zipCode":-1,"imageUrl":"https://scontent-frx5-1.xx.fbcdn.net/v/t1.0-9/12108297_10156149993640088_6462030065644528290_n.jpg?oh=b411718a4818c6a2a4b3710883ce8141&oe=59D47E21","countFollowing":0,"providerId":-1},"countFollowers":1,"countFollowing":0,"countItems":476,"moneySpent":1692427,"isFollowed":true},{"userDeatiles":{"userName":"2SarfRN3Geh5rPRNXdjH3ym5FCu1","updateTime":0,"firstName":"Matan","lastName":"Evrany","displayName":null,"linkedAccounts":null,"userEmail":"mevrany@gmail.com","mailboxes":null,"href":null,"createTime":0,"lastScanTime":1496669331593,"zipCode":-1,"imageUrl":"https://scontent-frx5-1.xx.fbcdn.net/v/t1.0-9/12108297_10156149993640088_6462030065644528290_n.jpg?oh=b411718a4818c6a2a4b3710883ce8141&oe=59D47E21","countFollowing":0,"providerId":-1},"countFollowers":1,"countFollowing":0,"countItems":476,"moneySpent":1692427,"isFollowed":true},{"userDeatiles":{"userName":"ntisEfaYbrQ7kQ4nu5AFg23RJKY2","updateTime":0,"firstName":"Eliran","lastName":"Eliassy","displayName":null,"linkedAccounts":null,"userEmail":"eliran.eliassy@gmail.com","mailboxes":null,"href":null,"createTime":0,"lastScanTime":-1,"zipCode":-1,"imageUrl":"http://www.expogeorgia.ge/wp-content/uploads/2015/09/anonymous-user.png","countFollowing":0,"providerId":-1},"countFollowers":0,"countFollowing":0,"countItems":0,"moneySpent":0,"isFollowed":false}];
   users: any = [];
   sub: Subscription;
+  intermediate = 0;
+  intermediate1= 0;
 
-  private counts : ICounts = {
-    countItems : 0,
-    countUsers : 0
+  counts : ICounts = {
+    itemsCount : 0,
+    usersCount : 0
   };
 
   
