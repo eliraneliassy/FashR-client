@@ -1,4 +1,5 @@
-import { AppConfig } from './../config/appConfig';
+import { environment } from '../../environments/environment';
+
 import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 
@@ -10,12 +11,12 @@ export class FeedService {
   }
 
   getFeed(page: number){
-    return this.http.get(AppConfig.apiURL + "/feed?page=" + page)
+    return this.http.get(environment.appURLs.apiURL + "/feed?page=" + page)
     .map((res) => res.json());
   }
 
   getUsersFeed(username: string, page:number){
-    return this.http.get(AppConfig.apiURL + "/feed/user?userId=" + username + "&page=" + page)
+    return this.http.get(environment.appURLs.apiURL + "/feed/user?userId=" + username + "&page=" + page)
     .map((res) => res.json());
   }
 

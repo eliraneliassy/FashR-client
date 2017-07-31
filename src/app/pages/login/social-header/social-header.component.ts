@@ -1,4 +1,4 @@
-import { AppConfig } from './../../../config/appConfig';
+import { environment } from '../../../../environments/environment';
 import { SliceRegistation } from './../../../models/sliceRegistration';
 import { UserManagerService } from './../../../services/user-manager-service.service';
 import { Observable } from 'rxjs';
@@ -32,7 +32,7 @@ export class SocialHeaderComponent implements OnInit {
       providerId: res.provider,
       userEmail: res.auth.providerData[0].email,
       imageUrl: res.auth.providerData[0].photoURL,
-      callBackUrl: AppConfig.apiURL + "/savenewuseritems/" + res.uid,
+      callBackUrl: environment.appURLs.apiURL + "/savenewuseritems/" + res.uid,
 
     }
 

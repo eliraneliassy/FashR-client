@@ -10,7 +10,7 @@ import { Component, OnInit, OnDestroy, Input, OnChanges, SimpleChanges } from '@
   styleUrls: ['./user-items.component.scss']
 })
 export class UserItemsComponent implements OnInit, OnDestroy, OnChanges {
- 
+
 
 
   constructor(private feedService: FeedService,
@@ -20,22 +20,23 @@ export class UserItemsComponent implements OnInit, OnDestroy, OnChanges {
   items: any = [];
   page: number = 0;
   isLoad: boolean = false;
-  //user: any;
   @Input() userId: string;
 
 
   loadMore(event) {
-
+    if(this.isLoad == true){
+      return;
+    }
     if (event) {
       this.page++;
       this.isLoad = true;
       this.feedService.getUsersFeed(this.userId, this.page).subscribe((res) => {
         if (res == null) {
           this.isLoad = true;
+          return;
         }
         if (this.items != null) {
           this.items = this.items.concat(res);
-          console.log(this.items)
           this.isLoad = false;
         }
       })
@@ -61,22 +62,22 @@ export class UserItemsComponent implements OnInit, OnDestroy, OnChanges {
     // });
 
 
-   this.getFeed();
+    this.getFeed();
   }
 
 
-     ngOnChanges(changes: SimpleChanges): void {
-      this.items = [];
-      this.getFeed();
-      
-    }
+  ngOnChanges(changes: SimpleChanges): void {
+    this.items = [];
+    this.getFeed();
 
-    private getFeed(){
-         this.feedService.getUsersFeed(this.userId, 0)
+  }
+
+  private getFeed() {
+    this.feedService.getUsersFeed(this.userId, 0)
       .subscribe((res) => {
         this.items = res;
       })
-    }
+  }
 
 
   ngOnDestroy(): void {

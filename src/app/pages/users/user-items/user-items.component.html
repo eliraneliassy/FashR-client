@@ -1,7 +1,7 @@
 <div>
 
   <div class="result-items" appInfiniteScroll (loadMore)="loadMore($event)" [isInLoad]="isLoad" #cont>
-  <div *ngFor="let item of items" class="col-sm-3 " >
+  <div *ngFor="let item of items" class="col-sm-3 item" >
       <fash-r-single-item [item]="item" ></fash-r-single-item>
   </div>
 </div>

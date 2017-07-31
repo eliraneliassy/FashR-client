@@ -3,7 +3,6 @@
 :host{
     width: 100%;
     
-    margin-bottom: 15px;
     font-size:12px;
     position: relative;
 }
@@ -14,7 +13,7 @@
 }
 
 .truncate {
-  height: 50px;
+  height: 46px;
 //   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

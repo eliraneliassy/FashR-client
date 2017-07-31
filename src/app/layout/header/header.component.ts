@@ -87,7 +87,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.router.navigate(['/login']);
   }
 
-  search(term: string): void {
+  search(term: string,event): void {
+    event.preventDefault();
     this.searchTerms.next(term);
   }
 

@@ -16,13 +16,10 @@ export class UserPageComponent implements OnInit, OnDestroy {
 
   userId: string;
   paramsSubscription: Subscription;
-  user: any = {
-    'userDeatiles': {
-      'imageUrl': 'http://www.expogeorgia.ge/wp-content/uploads/2015/09/anonymous-user.png'
-    }
-  };
+  private user : any ={};
 
   self: boolean = false;
+  private mouseOvered: boolean = false;
 
 
   constructor(private route: ActivatedRoute,
@@ -57,6 +54,7 @@ export class UserPageComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.userId = this.route.snapshot.params['id'];
+    
     this.loadUserDetails();
 
     this.paramsSubscription =
@@ -66,19 +64,7 @@ export class UserPageComponent implements OnInit, OnDestroy {
           this.loadUserDetails();
         });
 
-
-
-    //   this.authService.user.subscribe(user => {
-    //   if (user.uid != undefined) {
-    //     this.userM.getUserProfileDetails(user.uid)
-    //     .subscribe((res) => {
-    //       if (res != null) {
-    //        this.user = res;
-    //        console.log(this.user)
-    //       }
-    //     })
-    //   }
-    // });
+        
 
 
   }
@@ -107,6 +93,23 @@ export class UserPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.paramsSubscription.unsubscribe();
+  }
+
+  profilePictureUpdate(){
+    if(this.self == false){
+      return;
+    }
+
+
+  }
+
+  checkSelfProfile():void{
+    if(this.self){
+      this.mouseOvered = true;
+    }
+    else{
+      this.mouseOvered = false;
+    }
   }
 
 

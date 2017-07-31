@@ -1,6 +1,6 @@
+import { CountoDirective } from '../../directives/counto.directive';
 import { SharedModule } from './../../shared/shared/shared.module';
 import { AppModule } from './../../app.module';
-import { InfiniteScrollDirective } from './../../directives/infinite-scroll.directive';
 import { UserItemsComponent } from './user-items/user-items.component';
 
 import { userRouting } from './users.routing';
@@ -20,6 +20,7 @@ import { UsersComponent } from './users/users.component';
     UserPageComponent, 
     UsersComponent,
     UserItemsComponent,
+    CountoDirective
     ]
 })
 export class UsersModule { }

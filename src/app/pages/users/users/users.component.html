@@ -1,35 +1,39 @@
-<h3 class="text-center">Currently on FashBash <span class="fashcolors">XXX</span> people <span class="fashcolors">YYY </span>items</h3>
+<h3 class="text-center">Currently on FashBash
+    <span class="fashcolors" appCounto [step]="30" [countTo]="counts.usersCount" [countFrom]="0" [duration]="2" (countoChange)="intermediate = $event">{{intermediate | number:'1.0-0'}}</span>
+        people and
+    <span class="fashcolors" appCounto [step]="30" [countTo]="counts.itemsCount" [countFrom]="0" [duration]="2" (countoChange)="intermediate1 = $event">{{intermediate1 | number:'1.0-0'}}</span>
+    items</h3>
 <div class="users text-center innter-background">
     <div class="container">
         <div class="user col-xs-12 col-md-3 text-center" *ngFor="let user of users">
-                <div class="user-img">
-                    <img class="product-img img-circle" [src]="user.userDeatiles.imageUrl">
-                </div>
-                <div class="user-name">
-                    <a [routerLink]="['/users/',user.userDeatiles.userName]">
+            <div class="user-img">
+                <img class="product-img img-circle" [src]="user.userDeatiles.imageUrl">
+            </div>
+            <div class="user-name">
+                <a [routerLink]="['/users/',user.userDeatiles.userName]">
                         {{user.userDeatiles.firstName}} {{user.userDeatiles.lastName}}
                     </a>
-                </div>
-                <button class="btn btn-primary btn-fash" *ngIf="!user.isFollowed">Follow</button>
-                <button class="btn btn-warning btn-fash-grey" *ngIf="user.isFollowed">UnFollow</button>
-                <div class="social">
-                    <div class="row">
-                        <div class="col-xs-6">
-                            Followers <span class="fashcolors">{{user.countFollowers}}</span>
-                        </div>
-                        <div class="col-xs-6">
-                            Following <span class="fashcolors">{{user.countFollowing}}</span>
-                        </div>
+            </div>
+            <button class="btn btn-fash" *ngIf="!user.isFollowed">Follow</button>
+            <button class="btn btn-fash-grey" *ngIf="user.isFollowed">UnFollow</button>
+            <div class="social">
+                <div class="row">
+                    <div class="col-xs-6">
+                        Followers <span class="fashcolors">{{user.countFollowers}}</span>
                     </div>
-                    <div class="row">
-                        <div class="col-xs-6">
-                            Items <span class="fashcolors">{{user.countItems}}</span>
-                        </div>
-                        <div class="col-xs-6">
-                            Spent <span class="fashcolors">{{user.moneySpent / 100 | currency:'USD':true}}</span>
-                        </div>
+                    <div class="col-xs-6">
+                        Following <span class="fashcolors">{{user.countFollowing}}</span>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        Items <span class="fashcolors">{{user.countItems}}</span>
+                    </div>
+                    <div class="col-xs-6">
+                        Spent <span class="fashcolors">{{user.moneySpent / 100 | currency:'USD':true}}</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

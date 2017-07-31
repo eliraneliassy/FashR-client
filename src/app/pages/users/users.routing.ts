@@ -7,6 +7,7 @@ const USERS_ROUTER : Routes = [
     {path:'', children: [
         {path:'',component:UsersComponent},
         {path:':id',component:UserPageComponent},
+        {path:'self',component:UserPageComponent}
     ]}
 ];
 

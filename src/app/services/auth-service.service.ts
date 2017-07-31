@@ -1,8 +1,8 @@
-import { AppConfig } from './../config/appConfig';
+import { environment } from '../../environments/environment';
 import { UserManagerService } from './user-manager-service.service';
-import { Router } from '@angular/router';
 import { UserLoginModel, UserRegisterModel } from './../models/userLoginModel';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { BehaviorSubject, Observable } from 'rxjs';
 import * as firebase from 'firebase/app';
@@ -119,7 +119,7 @@ export class AuthService {
                             firstName: user.firstName,
                             lastName: user.lastName,
                             userEmail: user.email,
-                            callBackUrl: AppConfig.apiURL + "/savenewuseritems/" + uid
+                            callBackUrl: environment.appURLs.apiURL + "/savenewuseritems/" + uid
                         })
                     }
                     );

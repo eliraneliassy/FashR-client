@@ -1,49 +1,50 @@
 <div class="hero col-xs-12">
   <div class="col-xs-3">
-    <img class="persons" src="./assets/images/homepage/person1.png" >
+    <img class="persons" src="./assets/images/homepage/person1.png">
     <img class="persons" src="./assets/images/homepage/person2.png" style="top:147px">
     <img class="persons" src="./assets/images/homepage/person3.png" style="top:376px">
-    
+
     <img class="persons" src="./assets/images/homepage/person5.png" style="left: 180px;top: 70px;">
     <img class="persons" src="./assets/images/homepage/person4.png" style="left: 180px;top: 298px;">
 
-    
+
 
   </div>
   <div class="col-xs-6">
     <div class="hero-text section1">Where do your favorite</div>
     <div class="fashionistas"><img src="/assets/images/fashenistas.png"></div>
     <div class="hero-text section3">Buy their stuff from</div>
-    <div class="hero-text section4">
+    <div class="hero-text section4" >
       <b>Real people</b> sharing their<br> real purchases in <b>real time</b></div>
-    <button class="btn btn-fash">Join FashBash</button>
+    <button class="btn btn-fash" *ngIf="!isAuth">Start Explore!</button>
+    <button class="btn btn-fash" *ngIf="isAuth">Join FashBash</button>
   </div>
 
   <div class="col-xs-3">
-    <img class="persons right" src="./assets/images/homepage/person8.png" >
+    <img class="persons right" src="./assets/images/homepage/person8.png">
     <img class="persons right" src="./assets/images/homepage/person9.png" style="top: 160px;">
     <img class="persons right" src="./assets/images/homepage/person10.png" style="top: 388px;">
     <img class="persons right" src="./assets/images/homepage/person6.png" style="right: 178px; top: 60px;">
-      <img class="persons right" src="./assets/images/homepage/person7.png" style="right: 178px;top:298px">
-   
+    <img class="persons right" src="./assets/images/homepage/person7.png" style="right: 178px;top:298px">
+
   </div>
 </div>
 <div class="nowonfash col-xs-12">
-  
-    <img src="/assets/images/home-icn.png"> Now on fashbash
-    <div class="container">
-      <div class="carousel">
-        <div class="icon-left"></div>
-        <div class="items" *ngFor="let item of items">
-          <div class="col-xs-3">
-            <fash-r-single-item [item]="item" [bottom]="true"></fash-r-single-item>
-          </div>
-        </div>
 
-        <div class="icon-right"></div>
+  <img src="/assets/images/home-icn.png"> Now on fashbash
+  <div class="container">
+    <div class="carousel">
+      <div class="icon-left"></div>
+      <div class="items" *ngFor="let item of items">
+        <div class="col-xs-3">
+          <fash-r-single-item [item]="item" [bottom]="true" [userDetails]="true"></fash-r-single-item>
+        </div>
       </div>
+
+      <div class="icon-right"></div>
     </div>
   </div>
+</div>
 
 <div class="col-xs-12">
   <div class="howitworks">
@@ -60,8 +61,7 @@
         <div class="step">List people see your purchases</div>
       </div>
       <div class="col-xs-7 video">
-        <iframe width="100%" height="315" src="https://www.youtube.com/embed/4N79fknYOns" 
-        frameborder="0" allowfullscreen></iframe>
+        <iframe width="100%" height="315" src="https://www.youtube.com/embed/4N79fknYOns" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
   </div>

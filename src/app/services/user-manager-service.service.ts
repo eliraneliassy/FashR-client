@@ -1,6 +1,6 @@
+import { environment } from '../../environments/environment';
 import { SocailUserRegisterModel } from './../models/userLoginModel';
 import { AuthService } from './auth-service.service';
-import { AppConfig } from './../config/appConfig';
 import { SliceRegistation } from './../models/sliceRegistration';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Injectable } from '@angular/core';
@@ -25,24 +25,24 @@ export class UserManagerService {
     }
 
     getUser(uid : string){
-      return this.http.get(AppConfig.apiURL + "/users/getuser?userName=" + uid)
+      return this.http.get(environment.appURLs.apiURL + "/users/getuser?userName=" + uid)
         .map((res) => res.json())
         
     }
 
     getAllusers(){
-      return this.http.get(AppConfig.apiURL + "/users/")
+      return this.http.get(environment.appURLs.apiURL + "/users/")
       .map((res)=> res.json())
     }
 
     getAllUsersProfile(userName: string){
-      return this.http.get(AppConfig.apiURL + "/app/usersprofile/" + userName)
+      return this.http.get(environment.appURLs.apiURL + "/app/usersprofile/" + userName)
       .map((res)=> res.json())
     }
    
 
     getUserProfileDetails(userName : string, currentUserName: string){
-      return this.http.get(AppConfig.apiURL+ "/users/userprofile/"+ userName +"?followedUserName=" + currentUserName).
+      return this.http.get(environment.appURLs.apiURL+ "/users/userprofile/"+ userName +"?followedUserName=" + currentUserName).
       map((res)=>res.json())
     }
 
@@ -56,7 +56,7 @@ export class UserManagerService {
     let options = new RequestOptions({ headers: headers });
 
 
-    this.http.post(AppConfig.apiURL + "/users" ,body,options)
+    this.http.post(environment.appURLs.apiURL + "/users" ,body,options)
     .map((res)=> res.text())
     .subscribe((redirectUrl) => {
       window.location.replace(redirectUrl);

@@ -1,3 +1,5 @@
+import { AppService } from './services/app-service.service';
+import { CommonModule } from '@angular/common';
 import { environment } from './../environments/environment';
 
 import { SocialManagerService } from './services/social-manager.service';
@@ -26,6 +28,7 @@ import { FooterComponent } from './layout/footer/footer.component';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { CountoDirective } from './directives/counto.directive';
 
 
 
@@ -39,6 +42,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
     FooterComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     FormsModule,
     HttpModule,
@@ -48,7 +52,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
     AngularFireAuthModule,
 
   ],
-  providers: [AuthService, UserManagerService, FeedService, SocialManagerService, SuggestionsService, AuthGuardService],
+  providers: [AuthService, UserManagerService, FeedService, SocialManagerService, SuggestionsService, AuthGuardService, AppService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,4 @@
-import { AppConfig } from './../config/appConfig';
+import { environment } from '../../environments/environment';
 import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 
@@ -10,7 +10,7 @@ export class SuggestionsService {
   }
 
   getSuggestions(term: string){
-    return this.http.get(AppConfig.apiURL + "/suggestions?term=" + term)
+    return this.http.get(environment.appURLs.apiURL + "/suggestions?term=" + term)
     .map((res) => res.json())
   }
 

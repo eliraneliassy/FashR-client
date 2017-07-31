@@ -22,9 +22,30 @@
     }
   
     .user-img{
+        position: relative;
         img{
             width:200px;
             height: 200px;
+        }
+
+        .img-upload{
+            opacity: 0.2;
+
+        }
+
+        .upload{
+            z-index:2;
+            width:100%;
+            margin: 0 auto;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top:35%;
+            font-size: 12px;
+
+            button{
+                margin-bottom: 10px;
+            }
         }
           
     }
