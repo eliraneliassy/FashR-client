@@ -17,14 +17,35 @@
         <div class="form-group" style="display:inline;">
           <div class="input-group" id="search-box">
             <input type="text" class="form-control" name="serachbar" (keyup)="search(searchBox.value, $event)" placeholder="Search for people, brands and items here..."
-              #searchBox
-              autocomplete="off">
+              #searchBox autocomplete="off">
             <img class="magni" src="./assets/images/search.png">
-            <div id="auto-result">
-              <div *ngFor="let user of usersSuggestions" (click)="select(user)" class="search-result">
-                <img [src]="user.imageUrl">
-                <span class="userName">{{user.name}}</span>
+            <div id="auto-result" *ngIf="suggestions.usersSuggestions?.length>0 || suggestions.itemSuggestions?.length>0">
+              <div class="users" *ngIf="suggestions.usersSuggestions?.length>0">
+                <div class="sugeestionTitle fashcolors">
+                  Users:
+                </div>
+                <div *ngFor="let user of suggestions.usersSuggestions" (click)="userSelect(user)" class="search-result">
+                  <img [src]="user.imageUrl">
+                  <span class="userName">{{user.name}}</span>
+                </div>
               </div>
+              <div class="more">
+                <a [routerLink]="'/users'">Find more users...</a>
+              </div>
+              <hr>
+              <div class="items" *ngIf="suggestions.itemSuggestions?.length>0">
+                <div class="sugeestionTitle fashcolors">
+                  Items:
+                </div>
+                <div *ngFor="let item of suggestions.itemSuggestions" (click)="productSelect(item)" class="search-result">
+                  <img [src]="item.imageUrl">
+                  <span class="userName">{{item.description}}</span>
+                </div>
+              </div>
+              <div class="more">
+                <a [routerLink]="'/feed'">Find more products...</a>
+              </div>
+
             </div>
           </div>
 
@@ -55,12 +76,21 @@
       </div>
       <div *ngIf="isAuth">
         <ul class="nav navbar-nav navbar-right">
-          <li>
+          
 
+          <li>
+            <button class="btn btn-primary" [routerLink]="['feed']">
+              <img src="/assets/images/icon-no.png">
+              Everyone's feed
+            </button>
+          </li>
+
+          <li>
             <button class="btn btn-primary" [routerLink]="['users',firebase_user.userName]">
-          <img src="/assets/images/icon-no.png">
-          Profile
-          </button></li>
+              <img src="/assets/images/icon-no.png">
+              My Profile
+            </button>
+          </li>
 
           <li>
 

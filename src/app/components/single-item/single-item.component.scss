@@ -7,6 +7,11 @@
     position: relative;
 }
 
+.has-url{
+    border: 1px solid $fashbash-color !important;
+    cursor: pointer;
+}
+
 .item-title{
     padding-top:10px;
     font-weight: lighter;

@@ -5,8 +5,8 @@ import { Http, Headers } from '@angular/http';
 import { Observable, Subject } from 'rxjs';
 import { LoginComponent } from './../../pages/login/login/login.component';
 import { AuthService } from './../../services/auth-service.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'fash-r-header',
@@ -24,17 +24,25 @@ export class HeaderComponent implements OnInit, OnDestroy {
   user: any;
 
   private searchTerms = new Subject<string>();
-  usersSuggestions: any[] = [];
+  suggestions: any = {
+    'userSuggestions' : [],
+    'itemSuggestions' : []
+  };
 
+  @ViewChild('searchBox') searchBox : ElementRef;
 
   constructor(private auth: AuthService,
     private router: Router,
     private http: Http,
     private userService: UserManagerService,
-    private suggestionsService: SuggestionsService) {
+    private suggestionsService: SuggestionsService,
+  private renderer: Renderer2) {
 
-
-
+      this.router.events.subscribe((evt)=>{
+        if (!(evt instanceof NavigationEnd)) {
+            this.cleanSuggestions();
+        }
+      })
   }
 
   ngOnInit() {
@@ -54,17 +62,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .distinctUntilChanged()
       .subscribe(searchTextValue => {
         if (searchTextValue == "") {
-          this.usersSuggestions = [];
+          this.cleanSuggestions();
           return;
         }
         this.suggestionsService.getSuggestions(searchTextValue)
           .subscribe((res) => {
-            this.usersSuggestions = [];
+            this.cleanSuggestions();
             if (res) {
-              res.forEach(element => {
-                this.usersSuggestions.push(
+              console.log(res)
+              res.users.forEach(element => {
+                this.suggestions.usersSuggestions.push(
                   { 'name': element.firstName + " " + element.lastName, 'imageUrl': element.imageUrl, 'uid': element.userName }
                 )
+              });
+              res.items.forEach(element => {
+                this.suggestions.itemSuggestions.push(element);
               });
             }
           })
@@ -73,7 +85,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
 
   logout() {
-    debugger
     this.auth.logout()
       .then(() => {
         this.isAuth = false;
@@ -92,10 +103,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.searchTerms.next(term);
   }
 
-  select(user) {
+  userSelect(user) {
     this.router.navigate(['/users/' + user.uid]);
-    this.usersSuggestions = [];
+    this.cleanSuggestions();
 
+  }
+
+  productSelect(product){
+    this.router.navigate(['/users/' + product.user.uid])
+    this.cleanSuggestions();
+  }
+
+  private cleanSuggestions(){
+    this.suggestions.usersSuggestions = [];
+    this.suggestions.itemSuggestions = [];
+    this.renderer.setValue(this.searchBox,null);
   }
 
 }

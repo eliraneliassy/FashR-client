@@ -43,7 +43,10 @@ export class AuthService {
     }
 
     logout() {
-        return this.af.auth.signOut();
+        return this.af.auth.signOut().then((res)=>{
+            this.router.navigate(['/']);
+        });
+        
     }
 
     googleLogin() {

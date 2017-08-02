@@ -30,14 +30,23 @@ private router: Router) {
       this.userM.getUser(this.item.userName)
       .subscribe((res)=>{
         this.user = res;
-        console.log(this.user);
       })
+    }
+    if(this.item.productUrl !=null ){
+      console.log(this.item);
     }
 
   }
 
   goToUser(){
     this.router.navigate(['users',this.user.userName]);
+  }
+
+  goToProduct(){
+    if(this.item.productUrl == null){
+      return;
+    }
+    window.open(this.item.productUrl,"_blank");
   }
 
 }

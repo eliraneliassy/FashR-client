@@ -93,6 +93,7 @@ export class UserPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.paramsSubscription.unsubscribe();
+    this.self = false;
   }
 
   profilePictureUpdate(){
