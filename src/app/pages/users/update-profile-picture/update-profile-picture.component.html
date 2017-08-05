@@ -1,0 +1,41 @@
+<div class="col-xs-12 text-center">
+  <h4 md-dialog-title>Update Your Profile Picture</h4>
+  <p>
+    We provide you 2 options to update your profile picture:
+  </p>
+  <form #f="ngForm" (ngSubmit)="submit(f)">
+    <div class="col-xs-12 option">Upload your new profile picture from your files:
+      <label class="btn btn-default btn-file"> Browse 
+        <input type="file" style="display: none;"
+        ngModel
+        #file="ngModel"
+        name="file"
+        (change)="fileChange($event)"
+        accept=".png,.jpeg,.jpg">
+
+      </label>
+      
+    </div>
+    <div class="file-name">{{fileData?.name}}</div>
+    <div>
+      OR
+    </div>
+    <div class="col-xs-12 option">Upload your new profile picture from the web:
+    </div>
+    <input type="url" class="form-control" placeholder="Please paste here your picture URL" 
+    ngModel #url="ngModel" name="url"
+      (ngModelChange)="urlChanged($event)"
+      pattern="https?://.+">
+
+       <div *ngIf="!url.valid && url.touched">
+          Must be a valid URL!
+        </div>
+        <div>
+          
+        </div>
+    <div class="col-xs-12 demo-img" *ngIf="demoUrl != '' && demoUrl != null">
+      <img [src]="demoUrl">
+    </div>
+      <button class="btn btn-fash" [disabled]="!f.valid">Upload</button>
+  </form>
+</div>

@@ -1,3 +1,4 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppService } from './services/app-service.service';
 import { CommonModule } from '@angular/common';
 import { environment } from './../environments/environment';
@@ -30,6 +31,11 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { CountoDirective } from './directives/counto.directive';
 
+import {MdDialogModule} from '@angular/material';
+import { ClickOutsideDirective } from './directives/click-outside.directive';
+
+
+
 
 
 @NgModule({
@@ -39,7 +45,8 @@ import { CountoDirective } from './directives/counto.directive';
     HomeComponent,
     NotFoundComponent,
     TabsComponent,
-    FooterComponent
+    FooterComponent,
+    ClickOutsideDirective
   ],
   imports: [
     CommonModule,
@@ -50,7 +57,7 @@ import { CountoDirective } from './directives/counto.directive';
     SharedModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-
+    BrowserAnimationsModule
   ],
   providers: [AuthService, UserManagerService, FeedService, SocialManagerService, SuggestionsService, AuthGuardService, AppService],
   bootstrap: [AppComponent]

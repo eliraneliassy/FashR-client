@@ -1,11 +1,11 @@
-import { element } from 'protractor';
+import { HomeComponent } from './../../pages/home/home.component';
 import { SuggestionsService } from './../../services/suggestions-service.service';
 import { UserManagerService } from './../../services/user-manager-service.service';
 import { Http, Headers } from '@angular/http';
 import { Observable, Subject } from 'rxjs';
 import { LoginComponent } from './../../pages/login/login/login.component';
 import { AuthService } from './../../services/auth-service.service';
-import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild, HostListener } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
@@ -31,19 +31,26 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   @ViewChild('searchBox') searchBox : ElementRef;
 
+
   constructor(private auth: AuthService,
     private router: Router,
     private http: Http,
     private userService: UserManagerService,
     private suggestionsService: SuggestionsService,
-  private renderer: Renderer2) {
+  private renderer: Renderer2
+) {
 
       this.router.events.subscribe((evt)=>{
         if (!(evt instanceof NavigationEnd)) {
             this.cleanSuggestions();
         }
       })
+
   }
+
+  
+
+ 
 
   ngOnInit() {
 
@@ -119,5 +126,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.suggestions.itemSuggestions = [];
     this.renderer.setValue(this.searchBox,null);
   }
+
+  
 
 }

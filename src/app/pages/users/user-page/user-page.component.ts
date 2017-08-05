@@ -1,3 +1,5 @@
+import { UpdateProfilePictureComponent } from '../update-profile-picture/update-profile-picture.component';
+import { MdDialog } from '@angular/material';
 import { SocialManagerService } from './../../../services/social-manager.service';
 import { UserManagerService } from './../../../services/user-manager-service.service';
 import { AuthService } from './../../../services/auth-service.service';
@@ -25,8 +27,8 @@ export class UserPageComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute,
     private authService: AuthService,
     private userM: UserManagerService,
-    private socialM: SocialManagerService
-
+    private socialM: SocialManagerService,
+    private dialog : MdDialog
   ) {
 
   }
@@ -100,8 +102,17 @@ export class UserPageComponent implements OnInit, OnDestroy {
     if(this.self == false){
       return;
     }
-
-
+    let dialogRef = this.dialog.open(UpdateProfilePictureComponent);
+    dialogRef.componentInstance.userName = this.userId;
+     dialogRef.afterClosed().subscribe(result => {
+       if(result.s3Url != ""){
+        this.user.userDeatiles.imageUrl = result.s3Url;
+       }
+      else{
+        this.user.userDeatiles.imageUrl = result.demoUrl;
+      }
+      
+    });
   }
 
   checkSelfProfile():void{

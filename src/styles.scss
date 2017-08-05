@@ -1,6 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "src/style_declaration/colors.scss";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+
 .btn-fash{
     background-color:$fashbash-color;
     color:#fff;

@@ -11,8 +11,15 @@ button:focus {
     border-color: #e7e7e7;
     margin-bottom: 10px;
 }
+.navbar-form{
+    float:left;
+    width:45%;
+    
 
-.navbar-header{
+    .input-group{
+        display: block;
+        margin-bottom: 0px;
+    }
 }
 
 .navbar-brand{
@@ -36,7 +43,7 @@ button:focus {
 }
 
 .navbar-form .input-group>.form-control{
-    width: calc(540px);
+    width: calc(100%);
     margin-left: 20px;
 }
 
@@ -73,7 +80,7 @@ form{
     position: relative;
 
    .magni{
-       position: absolute;
+    position: absolute;
     top: 6px;
     left: 30px;
     z-index: 3;
@@ -153,6 +160,3 @@ form{
 }
 
 }
-
-
-

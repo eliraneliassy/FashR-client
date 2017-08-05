@@ -36,14 +36,16 @@ export class AuthService {
 
     ) {
         this.user = this.af.authState;
-        // .subscribe(user=>{
-        //     console.log(user);
-        // });
-        
+        this.user.subscribe((res)=>{
+            if(res){
+                this.isAuthenticated.next(true);
+            }
+        })
     }
 
     logout() {
         return this.af.auth.signOut().then((res)=>{
+            this.isAuthenticated.next(false);
             this.router.navigate(['/']);
         });
         
@@ -96,15 +98,10 @@ export class AuthService {
     }
 
     passwordLogin(user: UserLoginModel) {
-        // return new Promise<void>((resolve, reject) => {
-        //     return this.af.auth.signInWithEmailAndPassword(user.user, user.password)
-        //         .then(res => {
-        //             this.setAuth();
-        //             return resolve();
-        //         })
-        //         .catch(() => reject());
-        // });
-         return this.af.auth.signInWithEmailAndPassword(user.user, user.password);
+         return this.af.auth.signInWithEmailAndPassword(user.user, user.password).then
+         (()=>{
+             this.setAuth();
+         });
     }
 
     createUser(user: UserRegisterModel) {

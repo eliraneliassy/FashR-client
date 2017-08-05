@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
     private auth: AuthService) {
    
       this.auth.isAuthenticated.subscribe((res) => {
-      this.isAuth = res;
+        this.isAuth = res;
     })
 
   }
@@ -35,6 +35,7 @@ export class HomeComponent implements OnInit {
         this.items = res.slice(0, 8);
 
       })
+      
   }
 
    
