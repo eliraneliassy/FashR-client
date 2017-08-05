@@ -31,7 +31,6 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { CountoDirective } from './directives/counto.directive';
 
-import {MdDialogModule} from '@angular/material';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
 
 

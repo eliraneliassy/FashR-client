@@ -1,0 +1,22 @@
+<div class="col-xs-12">
+  <h3 *ngIf="isFollowers">{{user.userDeatiles?.firstName}} {{user.userDeatiles?.lastName}} Followers:</h3>
+  <h3 *ngIf="!isFollowers">{{user.userDeatiles?.firstName}} {{user.userDeatiles?.lastName}} Following:</h3>
+  <div class="folloers">
+    <table class="table table-hover">
+
+      <tbody>
+        <tr *ngFor="let follow of followers" [routerLink]="['users',follow.userName]">
+          <td>
+              <img [src]="follow.imageUrl">  
+          </td>
+          <td>{{follow.firstName}} </td>
+          <td>{{follow.lastName}} </td>
+
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+
+</div>

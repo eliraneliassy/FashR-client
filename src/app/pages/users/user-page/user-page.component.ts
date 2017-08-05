@@ -1,3 +1,4 @@
+import { FollowersComponent } from '../followers/followers.component';
 import { UpdateProfilePictureComponent } from '../update-profile-picture/update-profile-picture.component';
 import { MdDialog } from '@angular/material';
 import { SocialManagerService } from './../../../services/social-manager.service';
@@ -18,7 +19,7 @@ export class UserPageComponent implements OnInit, OnDestroy {
 
   userId: string;
   paramsSubscription: Subscription;
-  user : any ={};
+  user: any = {};
 
   self: boolean = false;
   mouseOvered: boolean = false;
@@ -28,7 +29,7 @@ export class UserPageComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private userM: UserManagerService,
     private socialM: SocialManagerService,
-    private dialog : MdDialog
+    private dialog: MdDialog
   ) {
 
   }
@@ -38,7 +39,7 @@ export class UserPageComponent implements OnInit, OnDestroy {
     this.authService.user.subscribe((res) => {
       if (res != null && res.uid != undefined) {
         currentUser = res.uid;
-        if(res.uid == this.userId){
+        if (res.uid == this.userId) {
           this.self = true;
         }
         this.userM.getUserProfileDetails(this.userId, currentUser)
@@ -56,7 +57,7 @@ export class UserPageComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.userId = this.route.snapshot.params['id'];
-    
+
     this.loadUserDetails();
 
     this.paramsSubscription =
@@ -66,7 +67,7 @@ export class UserPageComponent implements OnInit, OnDestroy {
           this.loadUserDetails();
         });
 
-        
+
 
 
   }
@@ -82,8 +83,8 @@ export class UserPageComponent implements OnInit, OnDestroy {
       })
   }
 
-  unFollow(){
-     let user = this.authService.getUser()
+  unFollow() {
+    let user = this.authService.getUser()
       .subscribe((res) => {
         this.socialM.unFollow(res.uid, this.userId)
           .subscribe(() => {
@@ -98,28 +99,41 @@ export class UserPageComponent implements OnInit, OnDestroy {
     this.self = false;
   }
 
-  profilePictureUpdate(){
-    if(this.self == false){
+  profilePictureUpdate() {
+    if (this.self == false) {
       return;
     }
     let dialogRef = this.dialog.open(UpdateProfilePictureComponent);
     dialogRef.componentInstance.userName = this.userId;
-     dialogRef.afterClosed().subscribe(result => {
-       if(result.s3Url != ""){
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.s3Url != "") {
         this.user.userDeatiles.imageUrl = result.s3Url;
-       }
-      else{
+      }
+      else {
         this.user.userDeatiles.imageUrl = result.demoUrl;
       }
-      
+
     });
   }
 
-  checkSelfProfile():void{
-    if(this.self){
+  showFollowers() {
+    let dialogRef = this.dialog.open(FollowersComponent);
+    dialogRef.componentInstance.user = this.user;
+    dialogRef.componentInstance.isFollowers = true;
+
+  }
+
+  showFollowing() {
+    let dialogRef = this.dialog.open(FollowersComponent);
+    dialogRef.componentInstance.user = this.user;
+    dialogRef.componentInstance.isFollowers = false;
+  }
+
+  checkSelfProfile(): void {
+    if (this.self) {
       this.mouseOvered = true;
     }
-    else{
+    else {
       this.mouseOvered = false;
     }
   }

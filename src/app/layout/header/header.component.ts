@@ -121,7 +121,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.cleanSuggestions();
   }
 
-  private cleanSuggestions(){
+  cleanSuggestions(){
     this.suggestions.usersSuggestions = [];
     this.suggestions.itemSuggestions = [];
     this.renderer.setValue(this.searchBox,null);

@@ -1,3 +1,4 @@
+import { FollowersComponent } from './followers/followers.component';
 import { FormsModule } from '@angular/forms';
 import { UpdateProfilePictureComponent } from './update-profile-picture/update-profile-picture.component';
 import { CountoDirective } from '../../directives/counto.directive';
@@ -24,9 +25,10 @@ import { UsersComponent } from './users/users.component';
     UsersComponent,
     UserItemsComponent,
     CountoDirective,
-    UpdateProfilePictureComponent
+    UpdateProfilePictureComponent,
+    FollowersComponent,
     ]
   ,
-  entryComponents:[UpdateProfilePictureComponent]
+  entryComponents:[UpdateProfilePictureComponent,FollowersComponent]
 })
 export class UsersModule { }

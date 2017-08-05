@@ -14,7 +14,12 @@
         .part{
             padding-top: 10px;
         }
+        .part.partclick{
+            cursor: pointer;
+        }
     }
+
+   
 
     .user-name{
         font-weight: bold;
