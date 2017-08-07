@@ -17,6 +17,14 @@ export class AuthService {
         return this.isAuthenticated.asObservable();
     }
 
+    isAuth() : Promise<boolean>{
+        return new Promise((resolve,reject)=>{
+            resolve(this.isAuthenticated.value)
+        });
+    }
+
+    
+
     // user: any = new BehaviorSubject({});
     getUser(): Observable<firebase.User> {
         return this.user;

@@ -7,8 +7,8 @@ import { RouterModule, Routes } from '@angular/router';
 const APP_ROUTES: Routes = [
     { path: '', component: HomeComponent },
     { path: 'login', loadChildren: 'app/pages/login/login.module#LoginModule' },
-    { path: 'users', loadChildren: 'app/pages/users/users.module#UsersModule' },
-    { path: 'feed', loadChildren: 'app/pages/feed/feed.module#FeedModule' },
+    { path: 'users', canActivate:[AuthGuardService] ,loadChildren: 'app/pages/users/users.module#UsersModule' },
+    { path: 'feed', canActivate:[AuthGuardService], loadChildren: 'app/pages/feed/feed.module#FeedModule' },
     { path: 'static', loadChildren: 'app/pages/static-pages/static-pages.module#StaticPagesModule' },
     {path:'404' , component: NotFoundComponent},
     {path:'**', redirectTo:'/404'}
