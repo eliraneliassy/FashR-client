@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import { SliceRegistation } from './../../../models/sliceRegistration';
 import { UserManagerService } from './../../../services/user-manager-service.service';
@@ -13,7 +14,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SocialHeaderComponent implements OnInit {
 
-  constructor(private authService: AuthService, private userManager: UserManagerService) {
+  constructor(private authService: AuthService, private userManager: UserManagerService,
+  private router : Router) {
 
   }
   error = {
@@ -26,53 +28,62 @@ export class SocialHeaderComponent implements OnInit {
   }
 
   private fetchSocialUser(res) {
+    debugger
     let user = {
-      displayName: res.auth.providerData[0].displayName,
-      userName: res.uid,
-      providerId: res.provider,
-      userEmail: res.auth.providerData[0].email,
-      imageUrl: res.auth.providerData[0].photoURL,
-      callBackUrl: environment.appURLs.apiURL + "/savenewuseritems/" + res.uid,
+      displayName: res.user.providerData[0].displayName,
+      userName: res.user.uid,
+      providerId: res.user.providerData[0].providerId,
+      userEmail: res.user.providerData[0].email,
+      imageUrl: res.user.providerData[0].photoURL,
+      callBackUrl: environment.appURLs.apiURL + "/savenewuseritems/" + res.user.uid,
 
     }
 
     return user;
   }
 
+  checkIfRegisterOrSignIn(res:any){
+     this.userManager.userExist(res.user.uid)
+        .subscribe((res)=>{
+            if (!res) {
+              let user = this.fetchSocialUser(res);
+              this.userManager.registerToSlice(user);
+            }
+            else{
+              this.router.navigate(["/"]);
+            }
+        })
+  }
+
   googleLogin() {
     this.authService.googleLogin()
       .then((res: any) => {
-        let user = this.fetchSocialUser(res);
-        this.userManager.registerToSlice(user);
-      })
-      .catch((err) => {
-        this.error = { err: true, msg: err.message }
-        console.log(this.error);
-      });;
+       this.checkIfRegisterOrSignIn(res)
+      },
+      (rej) => {
+        this.error = { err: true, msg: rej.message }
+      });
   }
 
   fbLogin() {
     this.authService.facebookLogin()
       .then((res) => {
-        let user = this.fetchSocialUser(res);
-        this.userManager.registerToSlice(user);
-      })
-      .catch((err) => {
-        this.error = { err: true, msg: err.message }
-        console.log(this.error);
-      });
+        this.checkIfRegisterOrSignIn(res)
+      },
+    (rej)=>{
+       this.error = { err: true, msg: rej.message }
+    })
 
   }
 
   twitterLogin() {
-    this.authService.twitterLogin().then((res) => {
-        let user = this.fetchSocialUser(res);
-        this.userManager.registerToSlice(user);
-      })
-       .catch((err) => {
-        this.error = { err: true, msg: err.message }
-        console.log(this.error);
-      });
+    this.authService.twitterLogin() 
+    .then((res) => {
+        this.checkIfRegisterOrSignIn(res)
+      },
+    (rej)=>{
+       this.error = { err: true, msg: rej.message }
+    })
   }
 
 

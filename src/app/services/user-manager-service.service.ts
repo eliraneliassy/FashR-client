@@ -80,13 +80,19 @@ export class UserManagerService {
 
   // }
 
-    updateProfilePicture(form : FormData) {
+  updateProfilePicture(form: FormData) {
 
-      let headers = new Headers();
-        headers.append('Accept', 'application/json');
-        let options = new RequestOptions({ headers: headers });
-        return this.http.post(environment.appURLs.apiURL + "/users/updateprofilepicture", form, options)
-       
+    let headers = new Headers();
+    headers.append('Accept', 'application/json');
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(environment.appURLs.apiURL + "/users/updateprofilepicture", form, options)
+
+  }
+
+  userExist(userName) {
+    debugger
+    return this.http.get(environment.appURLs.apiURL + "/users/userexist?userName=" + userName)
+    .map(res=>res.text())
   }
 
 }

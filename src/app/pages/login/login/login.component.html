@@ -1,4 +1,3 @@
-  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 
 <div class="container">
 
@@ -13,9 +12,9 @@
         <span class="omb_spanOr">or</span>
       </div>
     </div>
-      <div class="row" *ngIf="notCorrent">
+      <div class="row error-msg" *ngIf="notCorrent">
         <div class="col-xs-12 text-center">
-          <span class="error-msg">The email and password in not correct, please try again</span>
+          <span>{{errMsg}}</span>
         </div>
       </div>
     <div class="row omb_row-sm-offset-3">

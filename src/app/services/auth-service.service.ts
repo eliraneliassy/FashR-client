@@ -55,14 +55,10 @@ export class AuthService {
         return new Promise((resolve, reject) => {
             this.af.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
                 .then(res => {
+                    debugger
                     this.setAuth();
                     return resolve(res);
                 })
-                .catch((err) => {
-                    debugger
-                    console.log(err);
-                    return reject(err);
-                });
         })
 
     }
@@ -106,7 +102,7 @@ export class AuthService {
 
     createUser(user: UserRegisterModel) {
         let uid;
-        this.af.auth.createUserWithEmailAndPassword(user.email, user.password)
+        return this.af.auth.createUserWithEmailAndPassword(user.email, user.password)
             .then((res) => {
                 uid = res.uid;
                 this.passwordLogin(
@@ -124,13 +120,7 @@ export class AuthService {
                     }
                     );
             })
-            .catch((err: any) => {
-                debugger; console.log(err.message);
-                if (err.code == "auth/email-already-in-use")
-                    return "err:email-already-in-use";
-                else
-                    return "err";
-            })
+            
     }
 
 }

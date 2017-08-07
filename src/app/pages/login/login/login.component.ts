@@ -11,6 +11,8 @@ import { Component, OnInit } from '@angular/core';
 export class LoginComponent implements OnInit {
 
   public notCorrent : boolean = false;
+  errMsg : string = "";
+
   constructor(private auth:AuthService,
   private router: Router) { }
 
@@ -23,8 +25,11 @@ export class LoginComponent implements OnInit {
     .then((res)=>{debugger; 
         this.router.navigate(['/']);
       },
-     (rej)=>{this.notCorrent = true;})
-    .catch((rej)=>{debugger})
+     (rej)=>{
+       debugger
+      this.notCorrent = true;
+      this.errMsg = rej.message;
+    })
     
   }
 

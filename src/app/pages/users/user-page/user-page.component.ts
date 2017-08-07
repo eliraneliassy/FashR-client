@@ -4,10 +4,10 @@ import { MdDialog } from '@angular/material';
 import { SocialManagerService } from './../../../services/social-manager.service';
 import { UserManagerService } from './../../../services/user-manager-service.service';
 import { AuthService } from './../../../services/auth-service.service';
-import { Subscription } from 'rxjs/Rx';
+import { BehaviorSubject, Subscription } from 'rxjs/Rx';
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Params } from "@angular/router";
+import { ActivatedRoute, Params, Router, NavigationEnd } from "@angular/router";
 
 
 @Component({
@@ -24,20 +24,28 @@ export class UserPageComponent implements OnInit, OnDestroy {
   self: boolean = false;
   mouseOvered: boolean = false;
 
+  displayName = new BehaviorSubject<string>("");
+  firstName: string = "";
 
   constructor(private route: ActivatedRoute,
     private authService: AuthService,
     private userM: UserManagerService,
     private socialM: SocialManagerService,
-    private dialog: MdDialog
+    private dialog: MdDialog,
+    private router: Router
   ) {
-
+   
   }
 
   private loadUserDetails() {
     let currentUser;
     this.authService.user.subscribe((res) => {
       if (res != null && res.uid != undefined) {
+        debugger
+        if (res.providerData[0].displayName !=null && res.providerData[0].displayName != "") {
+          this.displayName.next(res.providerData[0].displayName);
+          this.firstName = res.providerData[0].displayName.split(" ")[0];
+        }
         currentUser = res.uid;
         if (res.uid == this.userId) {
           this.self = true;
@@ -46,11 +54,12 @@ export class UserPageComponent implements OnInit, OnDestroy {
           .subscribe((res) => {
             if (res != null) {
               this.user = res;
+              if (this.displayName.value == "") {
+                this.displayName.next(res.userDeatiles.firstName + " " + res.userDeatiles.lastName);
+              }
             }
           })
-
       }
-
     })
 
   }
@@ -63,6 +72,7 @@ export class UserPageComponent implements OnInit, OnDestroy {
     this.paramsSubscription =
       this.route.params
         .subscribe((params: Params) => {
+          this.self = false;
           this.userId = params['id'];
           this.loadUserDetails();
         });
@@ -106,11 +116,13 @@ export class UserPageComponent implements OnInit, OnDestroy {
     let dialogRef = this.dialog.open(UpdateProfilePictureComponent);
     dialogRef.componentInstance.userName = this.userId;
     dialogRef.afterClosed().subscribe(result => {
-      if (result.s3Url != "") {
-        this.user.userDeatiles.imageUrl = result.s3Url;
-      }
-      else {
-        this.user.userDeatiles.imageUrl = result.demoUrl;
+      if (result != undefined) {
+        if (result.s3Url != "") {
+          this.user.userDeatiles.imageUrl = result.s3Url;
+        }
+        else {
+          this.user.userDeatiles.imageUrl = result.demoUrl;
+        }
       }
 
     });
@@ -136,6 +148,12 @@ export class UserPageComponent implements OnInit, OnDestroy {
     else {
       this.mouseOvered = false;
     }
+  }
+  leave(){
+    console.log("false --")
+  }
+  clickOutSide() {
+    console.log("asd");
   }
 
 

@@ -9,18 +9,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private auth:AuthService) { }
+  constructor(private auth: AuthService) { }
   passwordValid = true;
-  userNameExist = false;
+
+  public notCorrent: boolean = false;
+  errMsg: string = "";
+
   ngOnInit() {
   }
 
-  onSubmit(user: UserRegisterModel){
-    if(user.password !== user.confirmPassword){
+  onSubmit(user: UserRegisterModel) {
+    if (user.password !== user.confirmPassword) {
       this.passwordValid = false;
       return;
     }
-    this.auth.createUser(user);
+    this.auth.createUser(user)
+      .then((res) => {
+
+      },
+      (rej) => {
+        this.notCorrent = true;
+        this.errMsg = rej.message;
+      });
   }
 
 }
