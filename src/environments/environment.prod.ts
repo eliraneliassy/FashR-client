@@ -1,7 +1,7 @@
 import { AppConfigProductions } from './../app/config/appConfig';
 
 export const environment = {
-  production: false,
+  production: true,
   firebase: {
    apiKey: "AIzaSyCq7LVXElTjRI_89E7R097Zx3r-Tug2rjY",
     authDomain: "fashr-58a5e.firebaseapp.com",

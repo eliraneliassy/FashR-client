@@ -1,3 +1,4 @@
+import { isNullOrUndefined } from 'util';
 import { FollowersComponent } from '../followers/followers.component';
 import { UpdateProfilePictureComponent } from '../update-profile-picture/update-profile-picture.component';
 import { MdDialog } from '@angular/material';
@@ -29,33 +30,34 @@ export class UserPageComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute,
     private authService: AuthService,
+
     private userM: UserManagerService,
     private socialM: SocialManagerService,
+
     private dialog: MdDialog,
     private router: Router
   ) {
-   
+
   }
 
   private loadUserDetails() {
     let currentUser;
     this.authService.user.subscribe((res) => {
       if (res != null && res.uid != undefined) {
-        debugger
-        if (res.providerData[0].displayName !=null && res.providerData[0].displayName != "") {
-          this.displayName.next(res.providerData[0].displayName);
-          this.firstName = res.providerData[0].displayName.split(" ")[0];
-        }
         currentUser = res.uid;
         if (res.uid == this.userId) {
           this.self = true;
         }
         this.userM.getUserProfileDetails(this.userId, currentUser)
-          .subscribe((res) => {
-            if (res != null) {
-              this.user = res;
-              if (this.displayName.value == "") {
-                this.displayName.next(res.userDeatiles.firstName + " " + res.userDeatiles.lastName);
+          .subscribe((user) => {
+            if (user != null) {
+              this.user = user;
+              if (isNullOrUndefined(this.user.userDeatiles.displayName)) {
+                this.user.userDeatiles.displayName =
+                  this.user.userDeatiles.firstName + " " + this.user.userDeatiles.lastName;
+              }
+              else {
+                this.user.userDeatiles.firstName = this.user.userDeatiles.displayName.split(" ")[0];
               }
             }
           })
@@ -65,9 +67,7 @@ export class UserPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.userId = this.route.snapshot.params['id'];
 
-    this.loadUserDetails();
 
     this.paramsSubscription =
       this.route.params
@@ -78,11 +78,10 @@ export class UserPageComponent implements OnInit, OnDestroy {
         });
 
 
-
-
   }
 
   follow() {
+    debugger
     let user = this.authService.getUser()
       .subscribe((res) => {
         this.socialM.follow(res.uid, this.userId)
@@ -107,6 +106,9 @@ export class UserPageComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.paramsSubscription.unsubscribe();
     this.self = false;
+    this.user = {};
+    this.userId = "";
+    this.displayName.next("");
   }
 
   profilePictureUpdate() {
@@ -149,11 +151,9 @@ export class UserPageComponent implements OnInit, OnDestroy {
       this.mouseOvered = false;
     }
   }
-  leave(){
-    console.log("false --")
+  leave() {
   }
   clickOutSide() {
-    console.log("asd");
   }
 
 

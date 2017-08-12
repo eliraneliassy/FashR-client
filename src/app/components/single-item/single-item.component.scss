@@ -2,10 +2,11 @@
 
 :host{
     width: 100%;
-    
     font-size:12px;
     position: relative;
+    
 }
+
 
 .has-url{
     border: 1px solid $fashbash-color !important;
@@ -43,6 +44,11 @@
     height: 200px;
     background: no-repeat 50% 50%;
     background-size: 100%;
+    transition: all .2s ease-in-out;
+}
+
+.item-box:hover{
+    transform: scale(1.05);
 }
 
 .user-name{

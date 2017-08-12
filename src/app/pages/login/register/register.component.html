@@ -98,7 +98,7 @@
             Password dosen't match
             </span>
             <span class="help-block" *ngIf="!confirmPass.valid && confirmPass.touched && confirmPass.errors?.required">Please confirm your password.</span>
-          <button class="btn btn-fash btn-block" type="submit" [disabled]="!f.valid">Register</button>
+          <button class="btn btn-fash btn-block" type="submit" [disabled]="!f.valid || submited">Register</button>
         </form>
       </div>
     </div>

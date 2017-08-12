@@ -1,3 +1,4 @@
+import { isNullOrUndefined } from 'util';
 import { HomeComponent } from './../../pages/home/home.component';
 import { SuggestionsService } from './../../services/suggestions-service.service';
 import { UserManagerService } from './../../services/user-manager-service.service';
@@ -78,8 +79,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
             if (res) {
               console.log(res)
               res.users.forEach(element => {
+                if (isNullOrUndefined(element.displayName)) {
+                element.displayName =
+                  element.firstName + " " + element.lastName;
+              }
                 this.suggestions.usersSuggestions.push(
-                  { 'name': element.firstName + " " + element.lastName, 'imageUrl': element.imageUrl, 'uid': element.userName }
+                  { 'displayName': element.displayName , 'imageUrl': element.imageUrl, 'uid': element.userName }
                 )
               });
               res.items.forEach(element => {

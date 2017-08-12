@@ -1,27 +1,26 @@
-<div (click)="goToProduct()" >
-  <div class="col-xs-12">
-    <div class="item-title truncate">
-      {{item?.description}}
-    </div>
-    <div class="price">
-      <span> {{item?.price / 100}}</span>
-      <div class="star">
-        <span class="glyphicon glyphicon-star-empty"></span>
-      </div>
-    </div>
-    <div class="item-box" [style.background-image]="'url(' + item.imageUrl + ')'" [class.has-url]="item.productUrl != null">
-
-    </div>
-
-    <div *ngIf="bottom" class="user-image" >
-      <img [src]="user?.imageUrl" >
-    </div>
-
-    <div *ngIf="bottom" class="user-name">
-      <a (click)="goToUser()">
-    {{user?.firstName +" " + user?.lastName}}
-    </a>
-    </div>
-
+<div class="col-xs-12">
+  <div class="item-title truncate">
+    {{item?.description}}
   </div>
+  <div class="price">
+    <span> {{item?.price / 100}}</span>
+    <div class="star">
+      <span class="glyphicon glyphicon-star-empty" (mousehover)="starthover = ture" [class.glyphicon-star]="starhover"></span>
+    </div>
+  </div>
+  <div (click)="goToProduct()">
+    <div class="item-box" [style.background-image]="'url(' + item.imageUrl + ')'" [class.has-url]="item.productUrl != null">
+    </div>
+  </div>
+
+  <div *ngIf="bottom" class="user-image">
+    <img [src]="user?.imageUrl">
+  </div>
+
+  <div *ngIf="bottom" class="user-name">
+    <a (click)="goToUser()">
+    {{user?.displayName}}
+    </a>
+  </div>
+
 </div>

@@ -57,11 +57,9 @@ export class UserManagerService {
     let options = new RequestOptions({ headers: headers });
 
 
-    this.http.post(environment.appURLs.apiURL + "/users", body, options)
+    return this.http.post(environment.appURLs.apiURL + "/users", body, options)
       .map((res) => res.text())
-      .subscribe((redirectUrl) => {
-        window.location.replace(redirectUrl);
-      });
+      
 
   }
 

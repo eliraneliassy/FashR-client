@@ -30,7 +30,7 @@
                 </div>
                 <div *ngFor="let user of suggestions.usersSuggestions" (click)="userSelect(user)" class="search-result">
                   <img [src]="user.imageUrl">
-                  <span class="userName">{{user.name}}</span>
+                  <span class="userName">{{user.displayName}}</span>
                 </div>
               <div class="more">
                 <a [routerLink]="'/users'">Find more users...</a>

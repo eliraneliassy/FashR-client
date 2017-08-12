@@ -3,7 +3,7 @@
   <div class="container">
     <div class="user-img col-md-3">
       <img class="product-img img-circle" [src]="user?.userDeatiles?.imageUrl" [class.img-upload]="mouseOvered" (mouseenter)="checkSelfProfile()">
-      <div *ngIf="mouseOvered" class="upload" (click)="profilePictureUpdate()" (mouseleave)="leave()">
+      <div *ngIf="mouseOvered" class="upload" (click)="profilePictureUpdate()" (mouseleave)="mouseOvered = false">
         <button type="button" class="btn btn-default btn-sm">
           <span class="glyphicon glyphicon-camera"></span> Upload
         </button>
@@ -15,7 +15,7 @@
 
       <div class="col-md-3">
         <span class="user-name">
-        {{displayName | async}} 
+        {{user.userDeatiles?.displayName}} 
       </span>
       </div>
 
@@ -23,7 +23,7 @@
 
         <div class="part user-followrs partclick" (click)="showFollowers()">
 
-          <span>Followrs</span>
+          <span>Followers</span>
           <span class="fashcolors">
                 {{user.countFollowers}}
           </span>
@@ -65,7 +65,7 @@
 </div>
 
 <div class="col-xs-12 text-center">
-  <h2>{{firstName}} Items:</h2>
+  <h2>{{user.userDeatiles?.firstName}} Items:</h2>
 </div>
 <div class="row col-xs-12 text-center">
   <fash-r-user-items [userId]="userId"></fash-r-user-items>

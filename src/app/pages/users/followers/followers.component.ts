@@ -1,3 +1,4 @@
+import { isNullOrUndefined } from 'util';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { SocialManagerService } from '../../../services/social-manager.service';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
@@ -20,13 +21,18 @@ export class FollowersComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (this.isFollowers) {
+      
       this.socialManagerService.getFollowers(this.user.userDeatiles.userName)
         .subscribe((res: any) => {
           if (res != null && res.length > 0) {
             this.followers = this.followers.concat(res);
-            console.log(this.followers)
+            this.followers.forEach(element => {
+              if (isNullOrUndefined(element.displayName)) {
+                element.displayName =
+                  element.firstName + " " + element.lastName;
+              }
+            });
           }
-
         })
     }
 
@@ -34,15 +40,21 @@ export class FollowersComponent implements OnInit, OnDestroy {
       this.socialManagerService.getFollowings(this.user.userDeatiles.userName)
         .subscribe((res: any) => {
           if (res != null && res.length > 0) {
-            this.followers = this.followers.concat(res);
-            console.log(this.followers)
+            this.followers = res;
+            this.followers.forEach(element => {
+              
+              if (isNullOrUndefined(element.displayName)) {
+                element.displayName =
+                  element.firstName + " " + element.lastName;
+              }
+            });
           }
 
         })
     }
 
   }
-  
+
     public ngOnDestroy(): void {
         this.followers = [];
     }

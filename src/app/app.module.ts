@@ -58,7 +58,15 @@ import { ClickOutsideDirective } from './directives/click-outside.directive';
     AngularFireAuthModule,
     BrowserAnimationsModule
   ],
-  providers: [AuthService, UserManagerService, FeedService, SocialManagerService, SuggestionsService, AuthGuardService, AppService],
+  providers: [
+    AuthService,
+    UserManagerService,
+    FeedService,
+    SocialManagerService,
+    SuggestionsService,
+    AuthGuardService,
+    AppService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

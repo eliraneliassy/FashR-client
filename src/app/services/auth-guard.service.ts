@@ -1,4 +1,4 @@
-import { AuthService } from './auth-service.service';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, CanActivateChild } from "@angular/router";
@@ -6,37 +6,29 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, CanAc
 @Injectable()
 export class AuthGuardService implements CanActivate, CanActivateChild {
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(private af: AngularFireAuth, private router: Router) { }
 
   canActivateChild(childRoute: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
+    state: RouterStateSnapshot): Observable<boolean> {
     return this.canActivate(childRoute, state);
   }
 
-  canActivate(route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
-    // this.auth.isAuthenticated.subscribe((res : boolean)=>{
-    //   if (res){
-    //     return true;
-    //   }
-    //   else{
-    //     this.router.navigate(['/login']);
-    //     return false;
-    //   }
-    // })
-
-    return this.auth.isAuth()
-      .then((res) => {
-        if (res) {
-          return true;
-        }
-        else {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+    return this.af.authState
+      .take(1)
+      .map(authState => !!authState)
+      .do(authenticated => {
+        if (!authenticated) {
           this.router.navigate(['/login']);
-          return false;
         }
-      })
+      });
   }
 
 
 
 }
+
+
+
+
+

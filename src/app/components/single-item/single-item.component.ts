@@ -1,3 +1,4 @@
+import { isNullOrUndefined } from 'util';
 import { NavigationExtras, Router } from '@angular/router';
 import { UserManagerService } from './../../services/user-manager-service.service';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -15,8 +16,11 @@ export class SingleItemComponent implements OnInit {
   @Input() userDetails : boolean = false;
   private imageurl;
   user = {
-    userName: ""
+    userName: "",
+    displayName: ""
   };
+
+  starthover : boolean = false;
 
   constructor(private sanitizer: DomSanitizer,
   private userM : UserManagerService,
@@ -30,6 +34,10 @@ private router: Router) {
       this.userM.getUser(this.item.userName)
       .subscribe((res)=>{
         this.user = res;
+        if (isNullOrUndefined(this.user.displayName)) {
+                this.user.displayName =
+                  res.firstName + " " + res.lastName;
+              }
       })
     }
     if(this.item.productUrl !=null ){

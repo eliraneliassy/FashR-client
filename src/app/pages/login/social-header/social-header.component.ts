@@ -15,13 +15,15 @@ import { Component, OnInit } from '@angular/core';
 export class SocialHeaderComponent implements OnInit {
 
   constructor(private authService: AuthService, private userManager: UserManagerService,
-  private router : Router) {
+    private router: Router) {
 
   }
   error = {
     'err': false,
     'msg': ""
   }
+
+  race : boolean = false;
 
 
   ngOnInit() {
@@ -42,23 +44,30 @@ export class SocialHeaderComponent implements OnInit {
     return user;
   }
 
-  checkIfRegisterOrSignIn(res:any){
-     this.userManager.userExist(res.user.uid)
-        .subscribe((res)=>{
-            if (!res) {
-              let user = this.fetchSocialUser(res);
-              this.userManager.registerToSlice(user);
-            }
-            else{
-              this.router.navigate(["/"]);
-            }
-        })
+  checkIfRegisterOrSignIn(res: any) {
+    this.userManager.userExist(res.user.uid)
+      .subscribe((isUser) => {
+        debugger
+        let val = JSON.parse(isUser);
+        if (!this.race && !val) {
+          let user = this.fetchSocialUser(res);
+          this.userManager.registerToSlice(user)
+          .subscribe((redirectUrl)=>{
+                this.race=true;
+              window.location.href = redirectUrl;
+          })
+        }
+        else {
+          this.router.navigate(["/feed"]);
+        }
+      })
   }
 
   googleLogin() {
     this.authService.googleLogin()
       .then((res: any) => {
-       this.checkIfRegisterOrSignIn(res)
+        debugger
+        this.checkIfRegisterOrSignIn(res)
       },
       (rej) => {
         this.error = { err: true, msg: rej.message }
@@ -70,20 +79,20 @@ export class SocialHeaderComponent implements OnInit {
       .then((res) => {
         this.checkIfRegisterOrSignIn(res)
       },
-    (rej)=>{
-       this.error = { err: true, msg: rej.message }
-    })
+      (rej) => {
+        this.error = { err: true, msg: rej.message }
+      })
 
   }
 
   twitterLogin() {
-    this.authService.twitterLogin() 
-    .then((res) => {
+    this.authService.twitterLogin()
+      .then((res) => {
         this.checkIfRegisterOrSignIn(res)
       },
-    (rej)=>{
-       this.error = { err: true, msg: rej.message }
-    })
+      (rej) => {
+        this.error = { err: true, msg: rej.message }
+      })
   }
 
 

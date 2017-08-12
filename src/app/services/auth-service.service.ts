@@ -17,15 +17,7 @@ export class AuthService {
         return this.isAuthenticated.asObservable();
     }
 
-    isAuth() : Promise<boolean>{
-        return new Promise((resolve,reject)=>{
-            resolve(this.isAuthenticated.value)
-        });
-    }
 
-    
-
-    // user: any = new BehaviorSubject({});
     getUser(): Observable<firebase.User> {
         return this.user;
     }
@@ -47,6 +39,7 @@ export class AuthService {
         this.user.subscribe((res)=>{
             if(res){
                 this.isAuthenticated.next(true);
+                
             }
         })
     }
@@ -124,6 +117,8 @@ export class AuthService {
                             lastName: user.lastName,
                             userEmail: user.email,
                             callBackUrl: environment.appURLs.apiURL + "/savenewuseritems/" + uid
+                        }).subscribe((redirectUrl)=>{
+                            window.location.replace(redirectUrl);
                         })
                     }
                     );

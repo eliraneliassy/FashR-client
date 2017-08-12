@@ -14,6 +14,7 @@ export class RegisterComponent implements OnInit {
 
   public notCorrent: boolean = false;
   errMsg: string = "";
+  submited : boolean = false;
 
   ngOnInit() {
   }
@@ -23,6 +24,7 @@ export class RegisterComponent implements OnInit {
       this.passwordValid = false;
       return;
     }
+    this.submited = true;
     this.auth.createUser(user)
       .then((res) => {
 
@@ -30,6 +32,7 @@ export class RegisterComponent implements OnInit {
       (rej) => {
         this.notCorrent = true;
         this.errMsg = rej.message;
+        this.submited = false;
       });
   }
 
