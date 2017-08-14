@@ -6,3 +6,16 @@ h2{
     margin-bottom: 50px;
     margin-top: 50px;
 }
+
+
+
+.result-items{
+    min-height: 400px;
+    position: relative;
+    
+    .loader{
+        position: absolute;
+        left:45%;
+        top:45%;
+    }
+}

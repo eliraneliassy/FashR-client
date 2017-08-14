@@ -11,6 +11,9 @@ export class FeedComponent implements OnInit {
   isLoad: boolean = false;
   page: number = 0;
   items = [];
+
+  loading : boolean = true;
+  
   constructor(private feedService: FeedService) { }
 
   ngOnInit() {
@@ -20,6 +23,7 @@ export class FeedComponent implements OnInit {
   private getFeed() {
     this.feedService.getFeed(0)
       .subscribe((res) => {
+        this.loading = false;
         this.items = res;
       })
   }

@@ -2,7 +2,9 @@
   <div class="col-xs-12 text-center">
     <h2>Our users <span class="fashcolors">bought</span> and <span class="fashcolors">shared</span> with us...</h2>
   </div>
+  
   <div class="result-items text-center" appInfiniteScroll (loadMore)="loadMore($event)" [isInLoad]="isLoad" #cont>
+    <div *ngIf="loading" class="loader"></div>
     <div *ngFor="let item of items" class="col-sm-3 item">
       <fash-r-single-item [item]="item" [bottom]="true" [userDetails]="true"></fash-r-single-item>
     </div>

@@ -24,30 +24,18 @@ export class SingleItemComponent implements OnInit {
 
   constructor(private sanitizer: DomSanitizer,
   private userM : UserManagerService,
-private router: Router) { 
+  private router: Router) { 
     
   }
 
   ngOnInit() {
     this.imageurl = this.sanitizer.bypassSecurityTrustStyle(this.item.imageUrl);
-    if(this.userDetails == true){
-      this.userM.getUser(this.item.userName)
-      .subscribe((res)=>{
-        this.user = res;
-        if (isNullOrUndefined(this.user.displayName)) {
-                this.user.displayName =
-                  res.firstName + " " + res.lastName;
-              }
-      })
-    }
-    if(this.item.productUrl !=null ){
-      console.log(this.item);
-    }
+    console.log(this.item);
 
   }
 
   goToUser(){
-    this.router.navigate(['users',this.user.userName]);
+    this.router.navigate(['users',this.item.userName]);
   }
 
   goToProduct(){

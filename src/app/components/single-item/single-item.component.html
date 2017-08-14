@@ -14,12 +14,12 @@
   </div>
 
   <div *ngIf="bottom" class="user-image">
-    <img [src]="user?.imageUrl">
+    <img [src]="item.userImageUrl">
   </div>
 
   <div *ngIf="bottom" class="user-name">
     <a (click)="goToUser()">
-    {{user?.displayName}}
+    {{item.userFullName}}
     </a>
   </div>
 
