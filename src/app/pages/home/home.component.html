@@ -19,6 +19,8 @@
       real time</div>
     <button class="btn btn-fash" *ngIf="isAuth" [routerLink]="'/feed'">Explore Now!</button>
     <button class="btn btn-fash" *ngIf="!isAuth" [routerLink]="'/login/register'">Join FashBash</button>
+    <button class="btn btn-fash" style="margin-left:10px;" (click)="scrollTo(howit)">How It Works?</button>
+    
   </div>
 
   <div class="col-xs-3">
@@ -47,7 +49,7 @@
 </div>
 
 <div class="col-xs-12">
-  <div class="howitworks">
+  <div class="howitworks" #howit>
     <div class="title">
       <img src="/assets/images/home-icn-2.png"> How it works
     </div>

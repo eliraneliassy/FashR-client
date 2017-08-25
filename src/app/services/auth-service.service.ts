@@ -72,7 +72,7 @@ export class AuthService {
                     return resolve(res);
                 })
                 .catch((err) => {
-                    console.log(err);
+                    
                     return reject(err);
                 });
         })
@@ -87,7 +87,7 @@ export class AuthService {
                     return resolve(res);
                 })
                 .catch((err) => {
-                    console.log(err);
+                    
                     return reject(err);
                 });
         })

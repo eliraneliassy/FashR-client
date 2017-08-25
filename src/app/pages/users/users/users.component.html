@@ -1,11 +1,10 @@
 <h3 class="text-center">Currently on FashBash
-    <span class="fashcolors" appCounto [step]="30" [countTo]="counts.usersCount" [countFrom]="0" [duration]="2" (countoChange)="intermediate = $event">{{intermediate | number:'1.0-0'}}</span>
-        people and
-    <span class="fashcolors" appCounto [step]="30" [countTo]="counts.itemsCount" [countFrom]="0" [duration]="2" (countoChange)="intermediate1 = $event">{{intermediate1 | number:'1.0-0'}}</span>
-    items</h3>
+    <span class="fashcolors" appCounto [step]="30" [countTo]="counts.usersCount" [countFrom]="0" [duration]="2" (countoChange)="intermediate = $event">{{intermediate | number:'1.0-0'}}</span>    people and
+    <span class="fashcolors" appCounto [step]="30" [countTo]="counts.itemsCount" [countFrom]="0" [duration]="2" (countoChange)="intermediate1 = $event">{{intermediate1 | number:'1.0-0'}}</span>    items
+</h3>
 <div class="users text-center innter-background">
-    <div class="container">
-        <div class="user col-xs-12 col-md-3 text-center" *ngFor="let user of users">
+    <div class="container" appInfiniteScroll (loadMore)="loadMore($event)" [isInLoad]="isLoading" #cont>
+        <div class="user col-xs-12 col-md-3 text-center" *ngFor="let user of users; let i = index">
             <div class="user-img">
                 <img class="product-img img-circle" [src]="user.userDeatiles.imageUrl">
             </div>
@@ -14,8 +13,8 @@
                         {{user.userDeatiles.displayName}} 
                     </a>
             </div>
-            <button class="btn btn-fash" *ngIf="!user.isFollowed">Follow</button>
-            <button class="btn btn-fash-grey" *ngIf="user.isFollowed">UnFollow</button>
+            <button class="btn btn-fash" *ngIf="!user.isFollowed" (click)="follow(user, i)">Follow</button>
+            <button class="btn btn-fash btn-fash-grey" *ngIf="user.isFollowed" (click)="unFollow(user, i)">UnFollow</button>
             <div class="social">
                 <div class="row">
                     <div class="col-xs-6">

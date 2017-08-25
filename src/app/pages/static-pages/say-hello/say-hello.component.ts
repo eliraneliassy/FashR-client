@@ -30,7 +30,9 @@ export class SayHelloComponent implements OnInit {
     this.emailService.sendContactUsEMail(contactUs)
     .toPromise()
     .then((res)=>{})
-    .catch((err)=>{console.log(err)});
+    .catch((err)=>{
+      
+    });
 
   }
 

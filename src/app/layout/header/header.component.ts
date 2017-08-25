@@ -77,7 +77,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
           .subscribe((res) => {
             this.cleanSuggestions();
             if (res) {
-              console.log(res)
               res.users.forEach(element => {
                 if (isNullOrUndefined(element.displayName)) {
                 element.displayName =

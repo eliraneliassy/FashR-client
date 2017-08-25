@@ -1,11 +1,12 @@
 <div class="col-xs-12">
   <div class="item-title truncate">
+    {{item.parsingConfidence}}
     {{item?.description}}
   </div>
   <div class="price">
     <span> {{item?.price / 100}}</span>
     <div class="star">
-      <span class="glyphicon glyphicon-star-empty" (mousehover)="starthover = ture" [class.glyphicon-star]="starhover"></span>
+      <span class="glyphicon glyphicon-star-empty"></span>
     </div>
   </div>
   <div (click)="goToProduct()">
@@ -21,6 +22,8 @@
     <a (click)="goToUser()">
     {{item.userFullName}}
     </a>
+      
+    
   </div>
 
 </div>

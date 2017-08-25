@@ -1,3 +1,5 @@
+import { EmailnotsupportedComponent } from './emailnotsupported/emailnotsupported.component';
+import { SharedModule } from '../../shared/shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { loginRouting } from './login.routing';
 import { NgModule } from '@angular/core';
@@ -10,8 +12,9 @@ import { SocialHeaderComponent } from './social-header/social-header.component';
   imports: [
     CommonModule,
     loginRouting,
-    FormsModule
+    FormsModule,
+    SharedModule
   ],
-  declarations: [LoginComponent, RegisterComponent, SocialHeaderComponent]
+  declarations: [LoginComponent, RegisterComponent, SocialHeaderComponent, EmailnotsupportedComponent]
 })
 export class LoginModule { }

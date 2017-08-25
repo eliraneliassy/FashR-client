@@ -41,6 +41,10 @@ export class HomeComponent implements OnInit {
 
   }
 
+  scrollTo(element){
+    element.scrollIntoView();
+  }
+
 
 
 }

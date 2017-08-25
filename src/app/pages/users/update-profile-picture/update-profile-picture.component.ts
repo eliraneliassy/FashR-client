@@ -21,7 +21,7 @@ export class UpdateProfilePictureComponent implements OnInit {
   fileData: File = null;
 
   ngOnInit() {
-    console.log(this.userName);
+    
   }
 
   urlChanged(event) {
@@ -58,7 +58,7 @@ export class UpdateProfilePictureComponent implements OnInit {
       let file: File = fileList[0];
       this.fileData = file;
     }
-    console.log(this.fileData);
+    
 
   }
 

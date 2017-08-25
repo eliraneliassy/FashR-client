@@ -1,24 +1,26 @@
-<div class="row omb_row-sm-offset-3 omb_socialButtons">
-  <div class="col-xs-4 col-sm-2">
-    <a (click)="fbLogin();" class="btn btn-lg btn-block omb_btn-facebook">
-      <i class="fa fa-facebook visible-xs"></i>
+<div class="social-header">
+  <div class="row omb_socialButtons ">
+    <div class="col-xs-6 ">
+      <a (click)="fbLogin();" class="btn btn-lg btn-block omb_btn-facebook">
+      <i class="fa fa-facebook "></i>
       <span class="hidden-xs">Facebook</span>
     </a>
-  </div>
-  <div class="col-xs-4 col-sm-2">
+    </div>
+    <!-- <div class="col-xs-4 col-sm-2">
     <a (click)="twitterLogin();" class="btn btn-lg btn-block omb_btn-twitter">
       <i class="fa fa-twitter visible-xs"></i>
       <span class="hidden-xs">Twitter</span>
     </a>
-  </div>
-  <div class="col-xs-4 col-sm-2">
-    <a (click)="googleLogin();" class="btn btn-lg btn-block omb_btn-google">
-      <i class="fa fa-google-plus visible-xs"></i>
-      <span class="hidden-xs">Google+</span>
+  </div> -->
+    <div class="col-xs-6">
+      <a (click)="googleLogin();" class="btn btn-lg btn-block omb_btn-google">
+        <i class="fa fa-google-plus"></i>
+      <span class="hidden-xs">Google+ </span>
     </a>
+    </div>
   </div>
-</div>
 
-<div *ngIf="error.err" class="err text-center">
-  {{error.msg}}
+  <div *ngIf="error.err" class="err text-center">
+    {{error.msg}}
+  </div>
 </div>

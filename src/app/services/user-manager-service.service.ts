@@ -36,8 +36,8 @@ export class UserManagerService {
       .map((res) => res.json())
   }
 
-  getAllUsersProfile(userName: string) {
-    return this.http.get(environment.appURLs.apiURL + "/app/usersprofile/" + userName)
+  getAllUsersProfile(userName: string, page : number) {
+    return this.http.get(environment.appURLs.apiURL + "/app/usersprofile/" + userName + "?page=" + page)
       .map((res) => res.json())
   }
 

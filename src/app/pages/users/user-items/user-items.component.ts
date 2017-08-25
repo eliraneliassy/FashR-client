@@ -31,7 +31,7 @@ export class UserItemsComponent implements OnInit, OnDestroy, OnChanges {
       this.page++;
       this.isLoad = true;
       this.feedService.getUsersFeed(this.userId, this.page).subscribe((res) => {
-        if (res == null) {
+        if (res == null || res.length == 0) {
           this.isLoad = true;
           return;
         }

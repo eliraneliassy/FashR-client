@@ -4,6 +4,6 @@ export const AppConfig = {
 };
 
 export const AppConfigProductions = {
-  apiURL : "http://fashr-prod2.us-west-2.elasticbeanstalk.com/api",
-  baseURL : "http://fashbash.s3-website-us-west-2.amazonaws.com/"
+  apiURL : "https://api.fashbash.co/api",
+  baseURL : "https://fashbash.co/"
 };

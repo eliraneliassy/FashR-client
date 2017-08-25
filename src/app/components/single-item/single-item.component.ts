@@ -14,13 +14,9 @@ export class SingleItemComponent implements OnInit {
   @Input() item : any;
   @Input() bottom: boolean = false;
   @Input() userDetails : boolean = false;
-  private imageurl;
-  user = {
-    userName: "",
-    displayName: ""
-  };
+  public imageurl;
+  
 
-  starthover : boolean = false;
 
   constructor(private sanitizer: DomSanitizer,
   private userM : UserManagerService,
@@ -30,8 +26,7 @@ export class SingleItemComponent implements OnInit {
 
   ngOnInit() {
     this.imageurl = this.sanitizer.bypassSecurityTrustStyle(this.item.imageUrl);
-    console.log(this.item);
-
+    
   }
 
   goToUser(){

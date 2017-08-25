@@ -5,9 +5,27 @@
     For .omb_spanOr use @body-bg instead of white.
 */
 
+.explain{
+	h3{
+		line-height: 300%;
+	}
+
+	ul{
+		li{
+			margin-top: 20px;
+			span{
+				display: block;
+				margin-bottom: 10px;
+			}
+		}
+
+
+	}
+}
+
 @media (min-width: 768px) {
     .omb_row-sm-offset-3 div:first-child[class*="col-"] {
-        margin-left: 25%;
+        margin-left: 15%;
     }
 }
 
@@ -60,4 +78,8 @@
 
 .error-msg{
 	margin:15px auto;
+}
+
+.p-logo{
+    width:120px;
 }
