@@ -2,7 +2,7 @@ import { UserManagerService } from '../../../services/user-manager-service.servi
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, NgForm } from '@angular/forms';
-import { MdDialogRef } from "@angular/material";
+import { MatDialogRef } from "@angular/material";
 
 @Component({
   selector: 'app-update-profile-picture',
@@ -13,7 +13,7 @@ export class UpdateProfilePictureComponent implements OnInit {
 
   constructor(private sanitzer: DomSanitizer,
     private userManager: UserManagerService,
-    public dialogRef: MdDialogRef<UpdateProfilePictureComponent>) { }
+    public dialogRef: MatDialogRef<UpdateProfilePictureComponent>) { }
 
   userName: string;
 

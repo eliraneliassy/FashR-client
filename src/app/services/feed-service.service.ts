@@ -10,14 +10,18 @@ export class FeedService {
     
   }
 
-  getFeed(page: number){
-    return this.http.get(environment.appURLs.apiURL + "/feed?page=" + page)
+  getFeed(page: number, userName : string){
+    return this.http.get(environment.appURLs.apiURL + "/feed?page=" + page + "&userName=" + userName)
     .map((res) => res.json());
   }
 
-  getUsersFeed(username: string, page:number){
-    return this.http.get(environment.appURLs.apiURL + "/feed/user?userId=" + username + "&page=" + page)
+  getUsersFeed(username: string, page:number, self : boolean){
+    return this.http.get(environment.appURLs.apiURL + "/feed/user?userId=" + username + "&page=" + page + "&self=" + self)
     .map((res) => res.json());
+  }
+
+  changeItemVisibility(itemId: string, visibility: boolean){
+    return this.http.get(environment.appURLs.apiURL + "/feed/changeproductvisibility?productId="+ itemId + "&visibility=" + visibility)
   }
 
 }

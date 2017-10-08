@@ -1,6 +1,8 @@
-<div class="col-xs-12">
+<div class="col-xs-12" (mouseenter)="mouseEnter(); " (mouseleave)="mouseLeave(); " [class.changeVisibility]="mouseInside"
+  [class.not-visibility]="item.productVisibility == false">
+
   <div class="item-title truncate">
-    {{item.parsingConfidence}}
+    <!-- {{item.parsingConfidence}} -->
     {{item?.description}}
   </div>
   <div class="price">
@@ -8,9 +10,13 @@
     <div class="star">
       <span class="glyphicon glyphicon-star-empty"></span>
     </div>
+    <span class="eye" *ngIf="mouseInside">
+      <img *ngIf="item.productVisibility != false" class="eye" src="./assets/images/hide.svg" (click)="hideItem()">
+      <img *ngIf="item.productVisibility == false" class="eye eye-show" src="./assets/images/show.svg" (click)="showItem()">
+    </span>
   </div>
   <div (click)="goToProduct()">
-    <div class="item-box" [style.background-image]="'url(' + item.imageUrl + ')'" [class.has-url]="item.productUrl != null">
+    <div class="item-box" [style.background-image]="'url(' + item.imageUrl + ')'" [class.has-url]="item.productUrl != null || this.item.merchantData?.websiteUrl !=null ">
     </div>
   </div>
 
@@ -22,8 +28,8 @@
     <a (click)="goToUser()">
     {{item.userFullName}}
     </a>
-      
-    
+
+
   </div>
 
 </div>

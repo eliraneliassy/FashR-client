@@ -1,3 +1,5 @@
+import { MatDialogRef } from '@angular/material';
+import { Router } from '@angular/router';
 import { isNullOrUndefined } from 'util';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { SocialManagerService } from '../../../services/social-manager.service';
@@ -11,7 +13,8 @@ import { DataSource } from "@angular/cdk/table";
 })
 export class FollowersComponent implements OnInit, OnDestroy {
 
-  constructor(private socialManagerService: SocialManagerService) {
+  constructor(private socialManagerService: SocialManagerService,private router: Router,
+  private dialogRef : MatDialogRef<FollowersComponent>) {
 
   }
 
@@ -57,5 +60,11 @@ export class FollowersComponent implements OnInit, OnDestroy {
 
     public ngOnDestroy(): void {
         this.followers = [];
+    }
+
+    gotoUser(userName: string){
+      this.router.navigate(['users',userName]);
+      this.dialogRef.close();
+      
     }
 }

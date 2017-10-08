@@ -1,6 +1,6 @@
 import { Router, NavigationEnd } from '@angular/router';
 import { AuthService } from './services/auth-service.service';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 
 @Component({

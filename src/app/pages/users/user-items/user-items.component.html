@@ -2,7 +2,7 @@
 
   <div class="result-items" appInfiniteScroll (loadMore)="loadMore($event)" [isInLoad]="isLoad" #cont>
   <div *ngFor="let item of items" class="col-xs-12 col-sm-4 col-md-3 item" >
-      <fash-r-single-item [item]="item" ></fash-r-single-item>
+      <fash-r-single-item [item]="item" [self]="userSelf"></fash-r-single-item>
   </div>
 </div>
 

@@ -1,3 +1,4 @@
+import { AuthService } from './../../../services/auth-service.service';
 import { FeedService } from './../../../services/feed-service.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -11,17 +12,21 @@ export class FeedComponent implements OnInit {
   isLoad: boolean = false;
   page: number = 0;
   items = [];
-
+  userName : string;
   loading : boolean = true;
   
-  constructor(private feedService: FeedService) { }
+  constructor(private feedService: FeedService,private authService : AuthService) { }
 
   ngOnInit() {
-    this.getFeed();
+    this.authService.user.subscribe((user)=>{
+      this.userName = user.uid;
+      this.getFeed(this.userName);
+
+    })
   }
 
-  private getFeed() {
-    this.feedService.getFeed(0)
+  private getFeed(userName : string) {
+    this.feedService.getFeed(0, userName)
       .subscribe((res) => {
         this.loading = false;
         this.items = res;
@@ -35,7 +40,7 @@ export class FeedComponent implements OnInit {
     if (event) {
       this.page++;
       this.isLoad = true;
-      this.feedService.getFeed(this.page).subscribe((res) => {
+      this.feedService.getFeed(this.page, this.userName).subscribe((res) => {
         if (res == null) {
           this.isLoad = true;
           return;

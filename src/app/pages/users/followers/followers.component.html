@@ -5,7 +5,9 @@
     <table class="table table-hover">
 
       <tbody>
-        <tr *ngFor="let follow of followers" [routerLink]="['users',follow.userName]">
+        <tr *ngFor="let follow of followers" 
+        (click)="gotoUser(follow.userName)"
+        >
           <td>
               <img [src]="follow.imageUrl">  
           </td>

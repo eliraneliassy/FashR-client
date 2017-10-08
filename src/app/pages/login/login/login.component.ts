@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     debugger
     this.auth.passwordLogin(userlogin)
     .then((res)=>{debugger; 
-        this.router.navigate(['/']);
+        this.router.navigate(['/feed']);
       },
      (rej)=>{
        debugger

@@ -47,6 +47,8 @@ export class UserManagerService {
       map((res) => res.json())
   }
 
+  
+
   checkIfFolow(userName: string, followedUserName: string) {
 
   }
@@ -88,9 +90,14 @@ export class UserManagerService {
   }
 
   userExist(userName) {
-    debugger
     return this.http.get(environment.appURLs.apiURL + "/users/userexist?userName=" + userName)
     .map(res=>res.text())
+  }
+
+  linkAccount(userName : string){
+    return this.http.get(environment.appURLs.apiURL + "/users/linkuseremail?userName=" + userName)
+    .map(res=>res.text())
+
   }
 
 }

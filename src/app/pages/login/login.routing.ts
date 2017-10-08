@@ -1,3 +1,4 @@
+import { EmailProblemComponent } from './email-problem/email-problem.component';
 import { EmailnotsupportedComponent } from './emailnotsupported/emailnotsupported.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
@@ -8,6 +9,7 @@ const LOGIN_ROUTER : Routes = [
         {path:'',component:LoginComponent},
         {path:'register',component:RegisterComponent},
         {path:'emailnotsupported',component:EmailnotsupportedComponent},
+        {path:'permission-denied',component:EmailProblemComponent},
     ]}
 ];
 

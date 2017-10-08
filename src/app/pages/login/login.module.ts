@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { SocialHeaderComponent } from './social-header/social-header.component';
+import { EmailProblemComponent } from "app/pages/login/email-problem/email-problem.component";
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { SocialHeaderComponent } from './social-header/social-header.component';
     FormsModule,
     SharedModule
   ],
-  declarations: [LoginComponent, RegisterComponent, SocialHeaderComponent, EmailnotsupportedComponent]
+  declarations: [LoginComponent, RegisterComponent, SocialHeaderComponent, EmailnotsupportedComponent, EmailProblemComponent]
 })
 export class LoginModule { }

@@ -1,28 +1,36 @@
+
 import { isNullOrUndefined } from 'util';
 import { FollowersComponent } from '../followers/followers.component';
 import { UpdateProfilePictureComponent } from '../update-profile-picture/update-profile-picture.component';
-import { MdDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { SocialManagerService } from './../../../services/social-manager.service';
 import { UserManagerService } from './../../../services/user-manager-service.service';
 import { AuthService } from './../../../services/auth-service.service';
 import { BehaviorSubject, Subscription } from 'rxjs/Rx';
 
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Params, Router, NavigationEnd } from "@angular/router";
 
 
 @Component({
   selector: 'app-user-page',
   templateUrl: './user-page.component.html',
-  styleUrls: ['./user-page.component.scss']
+  styleUrls: ['./user-page.component.scss'],
+  // changeDetection : ChangeDetectionStrategy.OnPush
 })
+
 export class UserPageComponent implements OnInit, OnDestroy {
 
   userId: string;
+  self: boolean = false;
+
+  userInformation = { "userId":"", "isSelf":false};
+  userInfoEvent : EventEmitter<object> = new EventEmitter<object>();
+
+  
   paramsSubscription: Subscription;
   user: any = {};
 
-  self: boolean = false;
   mouseOvered: boolean = false;
 
   displayName = new BehaviorSubject<string>("");
@@ -34,7 +42,7 @@ export class UserPageComponent implements OnInit, OnDestroy {
     private userM: UserManagerService,
     private socialM: SocialManagerService,
 
-    private dialog: MdDialog,
+    private dialog: MatDialog,
     private router: Router
   ) {
 
@@ -47,7 +55,14 @@ export class UserPageComponent implements OnInit, OnDestroy {
         currentUser = res.uid;
         if (res.uid == this.userId) {
           this.self = true;
+          this.userInformation.isSelf = true;
+          //this.selfEvent.emit(true);
         }
+        else{
+          this.userInformation.isSelf = false;
+          //this.selfEvent.emit(false);
+        }
+        this.userInfoEvent.emit(this.userInformation)
         this.userM.getUserProfileDetails(this.userId, currentUser)
           .subscribe((user) => {
             if (user != null) {
@@ -66,22 +81,27 @@ export class UserPageComponent implements OnInit, OnDestroy {
 
   }
 
+  init(){
+    this.userInformation = { "userId":"", "isSelf":false};
+    this.self = false;
+    this.user = {};
+    this.userId = "";
+    this.displayName.next("");
+  }
+
   ngOnInit() {
-
-
     this.paramsSubscription =
       this.route.params
         .subscribe((params: Params) => {
-          this.self = false;
+          debugger
+          this.init();
           this.userId = params['id'];
+          this.userInformation.userId = params['id'];
           this.loadUserDetails();
         });
-
-
   }
 
   follow() {
-    debugger
     let user = this.authService.getUser()
       .subscribe((res) => {
         this.socialM.follow(res.uid, this.userId)
@@ -105,10 +125,7 @@ export class UserPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.paramsSubscription.unsubscribe();
-    this.self = false;
-    this.user = {};
-    this.userId = "";
-    this.displayName.next("");
+    this.init()
   }
 
   profilePictureUpdate() {
@@ -151,13 +168,6 @@ export class UserPageComponent implements OnInit, OnDestroy {
       this.mouseOvered = false;
     }
   }
-  leave() {
-  }
-  clickOutSide() {
-  }
-
-
-
-
+ 
 
 }

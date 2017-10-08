@@ -25,15 +25,13 @@ export class HomeComponent implements OnInit {
 
   }
 
-
   items: any = [];
   page: number = 0;
-
   loading : boolean = true;
 
   ngOnInit() {
     
-    this.feedService.getFeed(this.page)
+    this.feedService.getFeed(this.page, null)
       .subscribe((res) => {
         this.items = res.slice(0, 8);
         this.loading = false;

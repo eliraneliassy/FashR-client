@@ -1,3 +1,4 @@
+import { SlicepermissionGuard } from './services/slicepermission.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppService } from './services/app-service.service';
 import { CommonModule } from '@angular/common';
@@ -66,6 +67,7 @@ import { ClickOutsideDirective } from './directives/click-outside.directive';
     SuggestionsService,
     AuthGuardService,
     AppService,
+    SlicepermissionGuard
   ],
   bootstrap: [AppComponent]
 })

@@ -1,3 +1,4 @@
+import { Http } from '@angular/http';
 import { environment } from '../../environments/environment';
 import { UserManagerService } from './user-manager-service.service';
 import { UserLoginModel, UserRegisterModel } from './../models/userLoginModel';
@@ -32,14 +33,15 @@ export class AuthService {
     constructor(
         public af: AngularFireAuth,
         private router: Router,
-        private userManager: UserManagerService
+        private userManager: UserManagerService,
+        private http: Http
 
     ) {
         this.user = this.af.authState;
-        this.user.subscribe((res)=>{
+        this.user.take(1).subscribe((res)=>{
             if(res){
                 this.isAuthenticated.next(true);
-                
+
             }
         })
     }
@@ -49,7 +51,7 @@ export class AuthService {
             this.isAuthenticated.next(false);
             this.router.navigate(['/']);
         });
-        
+
     }
 
     googleLogin() {
@@ -72,7 +74,7 @@ export class AuthService {
                     return resolve(res);
                 })
                 .catch((err) => {
-                    
+
                     return reject(err);
                 });
         })
@@ -87,7 +89,7 @@ export class AuthService {
                     return resolve(res);
                 })
                 .catch((err) => {
-                    
+
                     return reject(err);
                 });
         })
@@ -123,7 +125,12 @@ export class AuthService {
                     }
                     );
             })
-            
+
+    }
+
+    checkMailBoxPermissions(userName : string) {
+        return this.http.get(environment.appURLs.apiURL + "/app/checkusermailboxes?userName=" + userName)
+        .toPromise();
     }
 
 }
